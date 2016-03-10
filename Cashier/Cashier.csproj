@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAA3D888-9847-4ECF-9935-BECBA6CF97BB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cashier</RootNamespace>
+    <AssemblyName>Cashier</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MetroFramework">
+      <HintPath>..\..\..\..\..\Downloads\Compressed\metroframework-modern-ui-master\metroframework-modern-ui-master\DLL Files\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\..\..\..\..\Downloads\Compressed\metroframework-modern-ui-master\metroframework-modern-ui-master\DLL Files\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\..\..\..\..\Downloads\Compressed\metroframework-modern-ui-master\metroframework-modern-ui-master\DLL Files\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Shortcut, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Shortcut.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cashierDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cashierDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="cashierDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cashierDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="cashierDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cashierDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="classes\clsADO.cs" />
+    <Compile Include="classes\clsDB.cs" />
+    <Compile Include="classes\clsCollection.cs" />
+    <Compile Include="classes\ePrinting.cs" />
+    <Compile Include="classes\Helper.cs" />
+    <Compile Include="classes\OrderOfPayment.cs" />
+    <Compile Include="classes\Payor.cs" />
+    <Compile Include="classes\Semester.cs" />
+    <Compile Include="classes\Student.cs" />
+    <Compile Include="classes\StudentAccount.cs" />
+    <Compile Include="classes\User.cs" />
+    <Compile Include="CommonConstants.cs" />
+    <Compile Include="Connect.cs" />
+    <Compile Include="Controls\LollipopButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopFileInput.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopFlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopFolderInPut.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopSmallCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LollipopToggle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="frmCancelOR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelOR.Designer.cs">
+      <DependentUpon>frmCancelOR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDailyReportParticular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDailyReportParticular.Designer.cs">
+      <DependentUpon>frmDailyReportParticular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataEntry.Designer.cs">
+      <DependentUpon>frmDataEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.Designer.cs">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageRecord.Designer.cs">
+      <DependentUpon>frmManageRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMetroMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMetroMainMenu.Designer.cs">
+      <DependentUpon>frmMetroMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOPDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOPDetails.Designer.cs">
+      <DependentUpon>frmOPDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrderOfPaymentPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrderOfPaymentPrint.Designer.cs">
+      <DependentUpon>frmOrderOfPaymentPrint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrPayDataEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrPayDataEntry.Designer.cs">
+      <DependentUpon>frmOrPayDataEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrPayManageData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrPayManageData.Designer.cs">
+      <DependentUpon>frmOrPayManageData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPartialPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPartialPayment.Designer.cs">
+      <DependentUpon>frmPartialPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmParticularAmountDataEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmParticularAmountDataEntry.Designer.cs">
+      <DependentUpon>frmParticularAmountDataEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmParticulars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmParticulars.Designer.cs">
+      <DependentUpon>frmParticulars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayment.Designer.cs">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaymentDataEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaymentDataEntry.Designer.cs">
+      <DependentUpon>frmPaymentDataEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPaymentGetOP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaymentGetOP.Designer.cs">
+      <DependentUpon>frmPaymentGetOP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPayorDataEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPayorDataEntry.Designer.cs">
+      <DependentUpon>frmPayorDataEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportDaily.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportDaily.Designer.cs">
+      <DependentUpon>frmReportDaily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportsMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportsMain.Designer.cs">
+      <DependentUpon>frmReportsMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumberToText.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportTest.Designer.cs">
+      <DependentUpon>ReportTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SCIISDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCIISDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SCIISDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCIISDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SCIISDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UIManagers\DrawHelper.cs" />
+    <Compile Include="UIManagers\FontManager.cs" />
+    <EmbeddedResource Include="classes\Report1.rdlc" />
+    <EmbeddedResource Include="frmCancelOR.resx">
+      <DependentUpon>frmCancelOR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDailyReportParticular.resx">
+      <DependentUpon>frmDailyReportParticular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataEntry.resx">
+      <DependentUpon>frmDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmHome.resx">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageRecord.resx">
+      <DependentUpon>frmManageRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMetroMainMenu.resx">
+      <DependentUpon>frmMetroMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOPDetails.resx">
+      <DependentUpon>frmOPDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrderOfPaymentPrint.resx">
+      <DependentUpon>frmOrderOfPaymentPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrPayDataEntry.resx">
+      <DependentUpon>frmOrPayDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrPayManageData.resx">
+      <DependentUpon>frmOrPayManageData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPartialPayment.resx">
+      <DependentUpon>frmPartialPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmParticularAmountDataEntry.resx">
+      <DependentUpon>frmParticularAmountDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmParticulars.resx">
+      <DependentUpon>frmParticulars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayment.resx">
+      <DependentUpon>frmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaymentDataEntry.resx">
+      <DependentUpon>frmPaymentDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPaymentGetOP.resx">
+      <DependentUpon>frmPaymentGetOP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPayorDataEntry.resx">
+      <DependentUpon>frmPayorDataEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportDaily.resx">
+      <DependentUpon>frmReportDaily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportsMain.resx">
+      <DependentUpon>frmReportsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cashierDataSet.xsc">
+      <DependentUpon>cashierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="cashierDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>cashierDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cashierDataSet.xss">
+      <DependentUpon>cashierDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="cashierDataSet1.xsc">
+      <DependentUpon>cashierDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="cashierDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>cashierDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cashierDataSet1.xss">
+      <DependentUpon>cashierDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="cashierDataSet2.xsc">
+      <DependentUpon>cashierDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="cashierDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>cashierDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="cashierDataSet2.xss">
+      <DependentUpon>cashierDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Reports\DailyReport.rdlc" />
+    <EmbeddedResource Include="Reports\DailyReportParticular.rdlc" />
+    <EmbeddedResource Include="ReportTest.resx">
+      <DependentUpon>ReportTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Roboto-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Roboto-Regular.ttf" />
+    <None Include="SCIISDataSet.xsc">
+      <DependentUpon>SCIISDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SCIISDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SCIISDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SCIISDataSet.xss">
+      <DependentUpon>SCIISDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SCIISDataSet1.xsc">
+      <DependentUpon>SCIISDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="SCIISDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SCIISDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SCIISDataSet1.xss">
+      <DependentUpon>SCIISDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="SCIISDataSet2.xsc">
+      <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="SCIISDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SCIISDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SCIISDataSet2.xss">
+      <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
