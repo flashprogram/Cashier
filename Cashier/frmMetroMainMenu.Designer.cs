@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMetroMainMenu));
+            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Test", System.Windows.Forms.HorizontalAlignment.Left);
             this.mtCashier = new MetroFramework.Controls.MetroTile();
             this.mtOP = new MetroFramework.Controls.MetroTile();
             this.mtReports = new MetroFramework.Controls.MetroTile();
@@ -39,13 +40,21 @@
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.mtlUser = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.mtInfoOPIssued = new MetroFramework.Controls.MetroTile();
-            this.mtOPIssuedCount = new MetroFramework.Controls.MetroLabel();
+            this.label3 = new System.Windows.Forms.Label();
             this.mtInfoOPPaid = new MetroFramework.Controls.MetroTile();
+            this.label4 = new System.Windows.Forms.Label();
+            this.mtTotalCollection = new MetroFramework.Controls.MetroTile();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.lbTotalCollection = new System.Windows.Forms.Label();
+            this.lvSummaryOfCollection = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lbSummaryOfCollection = new MetroFramework.Controls.MetroLabel();
             this.metroPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mtInfoOPIssued.SuspendLayout();
+            this.mtTotalCollection.SuspendLayout();
             this.SuspendLayout();
             // 
             // mtCashier
@@ -133,14 +142,15 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label1.Font = new System.Drawing.Font("Segoe UI Light", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(22, 41);
+            this.label1.Location = new System.Drawing.Point(-1, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(445, 30);
+            this.label1.Size = new System.Drawing.Size(1048, 53);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Management System ( Currently in development)";
+            this.label1.Text = "Management System ( v. 0.1)";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -159,7 +169,6 @@
             this.metroPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.metroPanel1.Controls.Add(this.mtlUser);
             this.metroPanel1.Controls.Add(this.pictureBox1);
-            this.metroPanel1.Controls.Add(this.metroLink1);
             this.metroPanel1.Controls.Add(this.label2);
             this.metroPanel1.HorizontalScrollbarBarColor = true;
             this.metroPanel1.HorizontalScrollbarHighlightOnWheel = false;
@@ -200,31 +209,14 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // metroLink1
-            // 
-            this.metroLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(171)))), ((int)(((byte)(53)))));
-            this.metroLink1.FontWeight = MetroFramework.MetroLinkWeight.Regular;
-            this.metroLink1.ForeColor = System.Drawing.Color.SkyBlue;
-            this.metroLink1.Image = ((System.Drawing.Image)(resources.GetObject("metroLink1.Image")));
-            this.metroLink1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.metroLink1.Location = new System.Drawing.Point(128, 166);
-            this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(61, 33);
-            this.metroLink1.TabIndex = 11;
-            this.metroLink1.Text = "Logout";
-            this.metroLink1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLink1.UseCustomBackColor = true;
-            this.metroLink1.UseCustomForeColor = true;
-            this.metroLink1.UseSelectable = true;
-            // 
             // mtInfoOPIssued
             // 
             this.mtInfoOPIssued.ActiveControl = null;
-            this.mtInfoOPIssued.Controls.Add(this.mtOPIssuedCount);
+            this.mtInfoOPIssued.Controls.Add(this.label3);
             this.mtInfoOPIssued.Enabled = false;
-            this.mtInfoOPIssued.Location = new System.Drawing.Point(681, 105);
+            this.mtInfoOPIssued.Location = new System.Drawing.Point(374, 410);
             this.mtInfoOPIssued.Name = "mtInfoOPIssued";
-            this.mtInfoOPIssued.Size = new System.Drawing.Size(202, 143);
+            this.mtInfoOPIssued.Size = new System.Drawing.Size(200, 87);
             this.mtInfoOPIssued.Style = MetroFramework.MetroColorStyle.Silver;
             this.mtInfoOPIssued.TabIndex = 12;
             this.mtInfoOPIssued.Text = "Total OP issued as of :";
@@ -234,24 +226,23 @@
             this.mtInfoOPIssued.UseTileImage = true;
             this.mtInfoOPIssued.Visible = false;
             // 
-            // mtOPIssuedCount
+            // label3
             // 
-            this.mtOPIssuedCount.AutoSize = true;
-            this.mtOPIssuedCount.BackColor = System.Drawing.Color.Transparent;
-            this.mtOPIssuedCount.Location = new System.Drawing.Point(58, 56);
-            this.mtOPIssuedCount.Name = "mtOPIssuedCount";
-            this.mtOPIssuedCount.Size = new System.Drawing.Size(83, 19);
-            this.mtOPIssuedCount.TabIndex = 14;
-            this.mtOPIssuedCount.Text = "metroLabel1";
-            this.mtOPIssuedCount.UseCustomBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(84, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "label3";
+            this.label3.Visible = false;
             // 
             // mtInfoOPPaid
             // 
             this.mtInfoOPPaid.ActiveControl = null;
             this.mtInfoOPPaid.Enabled = false;
-            this.mtInfoOPPaid.Location = new System.Drawing.Point(681, 254);
+            this.mtInfoOPPaid.Location = new System.Drawing.Point(580, 410);
             this.mtInfoOPPaid.Name = "mtInfoOPPaid";
-            this.mtInfoOPPaid.Size = new System.Drawing.Size(202, 124);
+            this.mtInfoOPPaid.Size = new System.Drawing.Size(179, 87);
             this.mtInfoOPPaid.Style = MetroFramework.MetroColorStyle.Red;
             this.mtInfoOPPaid.TabIndex = 13;
             this.mtInfoOPPaid.Text = "Total OP paid as of :";
@@ -261,12 +252,114 @@
             this.mtInfoOPPaid.UseTileImage = true;
             this.mtInfoOPPaid.Visible = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(686, 406);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "label4";
+            this.label4.Visible = false;
+            // 
+            // mtTotalCollection
+            // 
+            this.mtTotalCollection.ActiveControl = null;
+            this.mtTotalCollection.Controls.Add(this.btnRefresh);
+            this.mtTotalCollection.Controls.Add(this.lbTotalCollection);
+            this.mtTotalCollection.Location = new System.Drawing.Point(374, 317);
+            this.mtTotalCollection.Name = "mtTotalCollection";
+            this.mtTotalCollection.Size = new System.Drawing.Size(200, 87);
+            this.mtTotalCollection.Style = MetroFramework.MetroColorStyle.Silver;
+            this.mtTotalCollection.TabIndex = 15;
+            this.mtTotalCollection.Text = "Total Collection as of : ";
+            this.mtTotalCollection.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtTotalCollection.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.mtTotalCollection.UseCustomForeColor = true;
+            this.mtTotalCollection.UseSelectable = true;
+            this.mtTotalCollection.UseTileImage = true;
+            this.mtTotalCollection.Visible = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(156, 2);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(41, 44);
+            this.btnRefresh.TabIndex = 1;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // lbTotalCollection
+            // 
+            this.lbTotalCollection.AutoSize = true;
+            this.lbTotalCollection.BackColor = System.Drawing.Color.Transparent;
+            this.lbTotalCollection.Font = new System.Drawing.Font("Segoe UI Semibold", 16.25F, System.Drawing.FontStyle.Bold);
+            this.lbTotalCollection.ForeColor = System.Drawing.Color.SpringGreen;
+            this.lbTotalCollection.Location = new System.Drawing.Point(63, 18);
+            this.lbTotalCollection.Name = "lbTotalCollection";
+            this.lbTotalCollection.Size = new System.Drawing.Size(39, 30);
+            this.lbTotalCollection.TabIndex = 0;
+            this.lbTotalCollection.Text = "[0]";
+            this.lbTotalCollection.Visible = false;
+            // 
+            // lvSummaryOfCollection
+            // 
+            this.lvSummaryOfCollection.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvSummaryOfCollection.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvSummaryOfCollection.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvSummaryOfCollection.FullRowSelect = true;
+            this.lvSummaryOfCollection.GridLines = true;
+            listViewGroup7.Header = "Test";
+            listViewGroup7.Name = "listViewGroup1";
+            this.lvSummaryOfCollection.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup7});
+            this.lvSummaryOfCollection.Location = new System.Drawing.Point(580, 105);
+            this.lvSummaryOfCollection.Name = "lvSummaryOfCollection";
+            this.lvSummaryOfCollection.Size = new System.Drawing.Size(236, 269);
+            this.lvSummaryOfCollection.TabIndex = 2;
+            this.lvSummaryOfCollection.UseCompatibleStateImageBehavior = false;
+            this.lvSummaryOfCollection.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Particular";
+            this.columnHeader1.Width = 147;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Total";
+            this.columnHeader2.Width = 45;
+            // 
+            // lbSummaryOfCollection
+            // 
+            this.lbSummaryOfCollection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.lbSummaryOfCollection.Location = new System.Drawing.Point(581, 373);
+            this.lbSummaryOfCollection.Name = "lbSummaryOfCollection";
+            this.lbSummaryOfCollection.Size = new System.Drawing.Size(235, 31);
+            this.lbSummaryOfCollection.TabIndex = 16;
+            this.lbSummaryOfCollection.Text = "Summary of Collection";
+            this.lbSummaryOfCollection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbSummaryOfCollection.UseCustomBackColor = true;
+            this.lbSummaryOfCollection.UseCustomForeColor = true;
+            this.lbSummaryOfCollection.Click += new System.EventHandler(this.lbSummaryOfCollection_Click);
+            // 
             // frmMetroMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1039, 548);
+            this.Controls.Add(this.lbSummaryOfCollection);
+            this.Controls.Add(this.lvSummaryOfCollection);
+            this.Controls.Add(this.mtTotalCollection);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.mtInfoOPPaid);
             this.Controls.Add(this.mtInfoOPIssued);
             this.Controls.Add(this.metroPanel1);
@@ -280,12 +373,13 @@
             this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.None;
             this.Style = MetroFramework.MetroColorStyle.White;
-            this.Text = " ";
             this.metroPanel1.ResumeLayout(false);
             this.metroPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mtInfoOPIssued.ResumeLayout(false);
             this.mtInfoOPIssued.PerformLayout();
+            this.mtTotalCollection.ResumeLayout(false);
+            this.mtTotalCollection.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,11 +395,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private MetroFramework.Controls.MetroPanel metroPanel1;
-        private MetroFramework.Controls.MetroLink metroLink1;
         private System.Windows.Forms.PictureBox pictureBox1;
         public MetroFramework.Controls.MetroLabel mtlUser;
         private MetroFramework.Controls.MetroTile mtInfoOPIssued;
         private MetroFramework.Controls.MetroTile mtInfoOPPaid;
-        private MetroFramework.Controls.MetroLabel mtOPIssuedCount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private MetroFramework.Controls.MetroTile mtTotalCollection;
+        private System.Windows.Forms.Button btnRefresh;
+        public System.Windows.Forms.Label lbTotalCollection;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        public System.Windows.Forms.ListView lvSummaryOfCollection;
+        private MetroFramework.Controls.MetroLabel lbSummaryOfCollection;
     }
 }

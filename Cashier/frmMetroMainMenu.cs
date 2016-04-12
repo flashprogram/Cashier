@@ -22,6 +22,7 @@ namespace Cashier
 
             mtInfoOPIssued.Text += " ["+  DateTime.Now.ToShortDateString() +"]";
             mtInfoOPPaid.Text += " [" + DateTime.Now.ToShortDateString() + "]";
+            label1.Width = base.Size.Width;
         }
 
    
@@ -52,6 +53,9 @@ namespace Cashier
                     mtReports.Enabled = true;
                     mtOPSearch.Enabled = true;
                     mtbCancelOR.Enabled = true;
+
+                    set_cashier();
+                 
                     break;
                 }
                 case ("Accounting"):
@@ -62,16 +66,55 @@ namespace Cashier
                     mtReports.Enabled = false;
                     mtOPSearch.Enabled = false;
                     mtbCancelOR.Enabled = false;
+
+                    set_cashier(false);
+
                     break;
                 }
                     
             }
         }
 
+
+        private void set_cashier(bool set = true)
+        {
+            mtTotalCollection.Visible = set;
+            lbTotalCollection.Visible = set;
+
+            lbSummaryOfCollection.Visible = set;
+            lvSummaryOfCollection.Visible = set;
+
+            string date = DateTime.Now.ToShortDateString();
+            Cashier.classes.clsCollection c = new Cashier.classes.clsCollection();
+            Dictionary<string, float> summary = c.summaryOfCollection(2, date);
+
+            if (lvSummaryOfCollection.Items.Count > 0)
+                lvSummaryOfCollection.Items.Clear();
+
+            for (int i = 0; i < summary.Count; i++)
+            {
+                ListViewItem lvi = new ListViewItem();
+                lvi.SubItems[0].Text = summary.Keys.ToList()[i];
+                ListViewItem.ListViewSubItem item = new ListViewItem.ListViewSubItem();
+                item.Text = Convert.ToString(summary[summary.Keys.ToList()[i]]);
+                lvi.SubItems.Add(item);
+               
+
+                lvSummaryOfCollection.Items.Add(lvi);
+               
+
+            }
+
+            
+            mtTotalCollection.Text = "Total Collection as of : " + date;
+
+            lbTotalCollection.Text = String.Format("{0:#,##0.##}", Cashier.classes.clsCollection.getDailyAccumulatedAmount(date)); 
+        }
+
         private void mtOPSearch_Click(object sender, EventArgs e)
         {
             frmPaymentGetOP f = new frmPaymentGetOP();
-
+            f.parent = this;
             f.ShowDialog();
         }
 
@@ -79,6 +122,16 @@ namespace Cashier
         {
             frmCancelOR f = new frmCancelOR();
             f.ShowDialog();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            set_cashier();
+        }
+
+        private void lbSummaryOfCollection_Click(object sender, EventArgs e)
+        {
+
         }
 
   

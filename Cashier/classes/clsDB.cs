@@ -16,8 +16,8 @@ namespace Cashier.classes
 
            
 
-            if (!db.checkConnection())
-                 db = new clsADO(Connect.ToDB("DB-ALT"));
+           // if (!db.checkConnection())
+             //    db = new clsADO(Connect.ToDB("DB-ALT"));
                  
 
             return db;

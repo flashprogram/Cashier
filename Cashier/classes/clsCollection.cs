@@ -14,14 +14,22 @@ namespace Cashier.classes
         private string collectionDate;
         private float amount;
         private string payor, paymentType = "";
+
+
+        public Dictionary<string, string> collectionData = new Dictionary<string, string>();
+
         // check details
         string checkNo, checkDate, bankName;
         float checkAmount;
         
 
-        public clsCollection()
+        public clsCollection(int ORNo = 0)
         {
-
+            if (ORNo != 0)
+            {
+                new clsDB().Con().SelectDataDictionary("SELECT * FROM collections WHERE ORNumber = " + ORNo, collectionData);
+               
+            }
         }
 
         public clsCollection(int OPNo, int ORNo, string cDate, float amount, string payor, string checkNo = null, string bankName = null, string checkDate = null, float checkAmount = 0, int paymentType = 0)
@@ -81,6 +89,8 @@ namespace Cashier.classes
             return obj;
         }
 
+      
+
         public Dictionary<string, float> summaryOfCollection(int OPType = 0, string datePaid = null)
         {
            
@@ -90,7 +100,7 @@ namespace Cashier.classes
 
             // **** QUERY SETTINGS ****
             string query = "SELECT Particular,CD.Amount From Collection_Details as CD JOIN Collections as Col ON Col.ORNumber = CD.ORNumber ";
-            string addQuery = "WHERE OPType = " + OPType + " AND Date_Paid = '" + datePaid +"' AND ISNULL(Col.PaymentType,0) != 9";
+            string addQuery = "WHERE OPType = " + OPType + " AND Date_Paid = '" + datePaid +"' AND ISNULL(Col.PaymentType,0) != 9 ORDER BY CD.Amount DESC";
             query = query + addQuery;
 
             string[][] tempHolder = new string[new clsDB().Con().countRecord(query)][]; 
@@ -119,6 +129,23 @@ namespace Cashier.classes
             
 
             return summaryData;
+        }
+
+        // static methods
+
+        public static double getDailyAccumulatedAmount(string date)
+        {
+            double Total = 0;
+            string[] temp = new string[1];
+            string query = "SELECT SUM(Amount) FROM Collections WHERE Date_Paid = '" + date + "'";
+
+            new clsDB().Con().SelectData(query, temp);
+
+            try { Total = double.Parse(temp[0]); }
+            catch (Exception ex) { }
+
+            return Total;
+
         }
 
     }

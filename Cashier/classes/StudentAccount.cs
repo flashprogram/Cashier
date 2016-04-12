@@ -162,7 +162,8 @@ namespace Cashier.classes
         {
             string query;
 
-            query = "SELECT TOP 18  SA.SemNo,sa.StudID,s.StudNo, SUM(Amount - ISNULL(Payment, 0 )), s.FName, s.MName, s.LName, ProgCode FROM Student_Account as sa LEFT JOIN student as s ON sa.StudID = s.StudID JOIN StudentCourse as SC ON SC.StudID = SA.StudID WHERE S.StudNo LIKE '%" + keyword + "%' OR CONCAT(LName,' ',FName) LIKE '%"+keyword+"%'  GROUP BY SA.SemNo,sa.StudID,s.StudNo, FName, MName,LName,ProgCode";
+            query = "SELECT DISTINCT TOP 18  NULL,s.StudID,s.StudNo, NULL, s.FName, s.MName, s.LName, ProgCode FROM Student as s  INNER JOIN Student_Account as SA ON sa.StudID = s.StudID INNER JOIN StudentCourse as SC ON SC.StudID = SA.StudID WHERE S.StudNo LIKE '%" + keyword + "%' OR  ( CONCAT(LName,' ',FName) LIKE '%"+keyword+"%' " +
+                    "OR   CONCAT(LName,', ',FName,' ', MName)  LIKE '"+keyword+"%' OR CONCAT(FName,' ',MName,' ',LName) LIKE '"+keyword+"%' )  GROUP BY s.StudID,s.StudNo, FName, MName,LName,ProgCode";
            
             return query;
         }

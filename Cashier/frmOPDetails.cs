@@ -33,8 +33,11 @@ namespace Cashier
             mtOPType.Text = OP.getOPType();
             this.ControlBox = true;
 
+            /* 
             string[][] particulars =  OP.getOrderOfPaymentItem(OPNo);
             new clsDB().Con().listViewTransferData(particulars, listView1);
+             * */
+            new clsDB().Con().FillLvw(listView1, "SELECT particular, Assess.AssessmentID, TPD.Amount, Assess.Is_Misc, Assess.ShortName FROM tbl_PayOrder_Details as TPD LEFT JOIN Assessment as Assess ON TPD.particular LIKE Assess.AssessmentName WHERE OPSeqNo =  " + OPNo);
 
         }
 

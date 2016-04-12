@@ -51,7 +51,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(510, 11);
+            this.btnSave.Location = new System.Drawing.Point(383, 11);
             this.btnSave.Size = new System.Drawing.Size(53, 40);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Submit";
@@ -59,7 +59,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(569, 11);
+            this.btnCancel.Location = new System.Drawing.Point(442, 11);
             this.btnCancel.Size = new System.Drawing.Size(53, 40);
             this.btnCancel.TabIndex = 7;
             // 
@@ -75,7 +75,7 @@
             this.lvStudents.GridLines = true;
             this.lvStudents.Location = new System.Drawing.Point(0, 0);
             this.lvStudents.Name = "lvStudents";
-            this.lvStudents.Size = new System.Drawing.Size(610, 264);
+            this.lvStudents.Size = new System.Drawing.Size(610, 267);
             this.lvStudents.TabIndex = 2;
             this.lvStudents.UseCompatibleStateImageBehavior = false;
             this.lvStudents.View = System.Windows.Forms.View.Details;
@@ -89,22 +89,22 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "StudentNo";
-            this.columnHeader7.Width = 106;
+            this.columnHeader7.Width = 76;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Firstname";
-            this.columnHeader2.Width = 161;
+            this.columnHeader2.Width = 133;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Middlename";
-            this.columnHeader3.Width = 144;
+            this.columnHeader3.Width = 117;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Lastname";
-            this.columnHeader4.Width = 166;
+            this.columnHeader4.Width = 138;
             // 
             // tabControl1
             // 
@@ -113,7 +113,7 @@
             this.tabControl1.Location = new System.Drawing.Point(10, 67);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(618, 293);
+            this.tabControl1.Size = new System.Drawing.Size(486, 293);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
@@ -123,7 +123,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(610, 267);
+            this.tabPage1.Size = new System.Drawing.Size(478, 267);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Student List";
             // 
@@ -194,9 +194,9 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.textBox2.Location = new System.Drawing.Point(222, 366);
+            this.textBox2.Location = new System.Drawing.Point(192, 366);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(402, 31);
+            this.textBox2.Size = new System.Drawing.Size(304, 31);
             this.textBox2.TabIndex = 1;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
@@ -205,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 408);
+            this.ClientSize = new System.Drawing.Size(509, 411);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.tabControl1);

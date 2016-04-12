@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lbStudentName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mtbDiscount = new MetroFramework.Controls.MetroButton();
             this.label9 = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
             this.tAmount = new System.Windows.Forms.TextBox();
@@ -194,6 +195,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox1.Controls.Add(this.mtbDiscount);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.lbTotal);
             this.groupBox1.Controls.Add(this.tAmount);
@@ -210,6 +212,16 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Payment Summary";
+            // 
+            // mtbDiscount
+            // 
+            this.mtbDiscount.Location = new System.Drawing.Point(38, 65);
+            this.mtbDiscount.Name = "mtbDiscount";
+            this.mtbDiscount.Size = new System.Drawing.Size(105, 23);
+            this.mtbDiscount.TabIndex = 27;
+            this.mtbDiscount.Text = "Discount";
+            this.mtbDiscount.UseSelectable = true;
+            this.mtbDiscount.Click += new System.EventHandler(this.mtbDiscount_Click_1);
             // 
             // label9
             // 
@@ -705,5 +717,6 @@
         private System.Windows.Forms.GroupBox gbNSTPType;
         private MetroFramework.Controls.MetroRadioButton mtrbCWTS;
         private MetroFramework.Controls.MetroRadioButton mtrbROTC;
+        private MetroFramework.Controls.MetroButton mtbDiscount;
     }
 }

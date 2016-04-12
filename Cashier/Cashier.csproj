@@ -147,6 +147,12 @@
     <Compile Include="frmDataEntry.Designer.cs">
       <DependentUpon>frmDataEntry.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDiscount.Designer.cs">
+      <DependentUpon>frmDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +261,12 @@
     <Compile Include="frmReportsMain.Designer.cs">
       <DependentUpon>frmReportsMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSearchStudent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearchStudent.Designer.cs">
+      <DependentUpon>frmSearchStudent.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumberToText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -291,6 +303,9 @@
     <EmbeddedResource Include="frmDataEntry.resx">
       <DependentUpon>frmDataEntry.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDiscount.resx">
+      <DependentUpon>frmDiscount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +326,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrderOfPaymentPrint.resx">
       <DependentUpon>frmOrderOfPaymentPrint.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOrPayDataEntry.resx">
       <DependentUpon>frmOrPayDataEntry.cs</DependentUpon>
@@ -344,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportsMain.resx">
       <DependentUpon>frmReportsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearchStudent.resx">
+      <DependentUpon>frmSearchStudent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

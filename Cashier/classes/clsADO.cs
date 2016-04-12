@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Drawing;
+using MetroFramework.Forms;
+using MetroFramework.Controls;
 
 namespace Cashier.classes
 {
@@ -616,6 +618,37 @@ namespace Cashier.classes
             return true;
           
         }
+
+        #region FillMetroGridView
+        public void FillMetroGrid(MetroGrid dg, string sql)
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(mConnstring);
+                SqlDataAdapter dtadapter = new SqlDataAdapter(sql, conn);
+
+
+                conn.Open();
+
+                dtset.Clear();
+                dtadapter.Fill(dtset, "tbl");
+
+                //dg.Rows.Clear();//clears DataGridView
+                dg.DataSource = dtset.Tables["tbl"];
+
+                recordCount = dtset.Tables["tbl"].Rows.Count;//set RecordCount
+
+
+                conn.Close();
+                conn.Dispose();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error:" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        #endregion
 
         public string[][] SelectData(String sql, string[][] obj)
         {

@@ -20,6 +20,9 @@ namespace Cashier
         AutoCompleteStringCollection DataCollection;
         string sql = "SELECT  TOP 50 SA.SemNo, SA.StudID,S.StudNo, SUM(Amount - ISNULL(Payment, 0 )) as Amount ,FName, MName, LName, ProgCode  FROM Student_Account as SA JOIN Student as S ON SA.StudID = S.StudID JOIN StudentCourse as SC ON SC.StudID = SA.StudID WHERE SA.semNo = " + Semester.getCurrentSemester() + " GROUP BY SA.StudID,S.StudNo, SA.SemNo,FName, MName,LName, ProgCode ";
         string opQuery = "SELECT TOP 50 OPNo, OP.Amount, CAST( CASE WHEN OP.Payor IS NULL OR OP.Payor = '' THEN CONCAT(FName,' ',MName,' ',LName) ELSE OP.Payor END AS varchar(100))  as Payor, CAST (CASE WHEN  PAID = 0 THEN 'Not Paid' ELSE 'Paid' END as varchar(50) ) as Paid From tbl_PayOrder as OP LEFT JOIN Student as S ON S.StudID = OP.StudID WHERE Paid = 0 ORDER BY OP.OPNo DESC";
+       
+        public int lastOPNumber = int.Parse(OrderOfPayment.getLastOPNo());
+        
         public frmOrPayManageData()
         {
             InitializeComponent();
@@ -28,6 +31,9 @@ namespace Cashier
             RefreshData(" ");
 
             new clsDB().Con().FillLvw(lvOP, opQuery);
+
+            lbOPCount.Text = ""+OrderOfPayment.getNumberOfOP();
+            lbPaidOPCount.Text = ""+OrderOfPayment.getNumberOfPaidOP();
         }
 
        
@@ -88,7 +94,9 @@ namespace Cashier
         {
             if (lvManageRecord.CheckedItems.Count < 1)
             {
-                frmOrPayDataEntry.show_asAdd(new MsgHandler(RefreshData));
+                frmOrPayDataEntry f = frmOrPayDataEntry.show_asAdd(new MsgHandler(RefreshData), this.lastOPNumber);
+                if (f.hasUpdated)
+                    this.lastOPNumber = f.lastOPNumber;
             }
             else
             {
@@ -101,7 +109,11 @@ namespace Cashier
                 frmOrPayDataEntry.studentData = st.studentData;
 
 
-                frmOrPayDataEntry.show_asAdd(new MsgHandler(RefreshData));
+                frmOrPayDataEntry f = frmOrPayDataEntry.show_asAdd(new MsgHandler(RefreshData), this.lastOPNumber);
+
+                if (f.hasUpdated)
+                    this.lastOPNumber = f.lastOPNumber;
+              
             }
             
 
@@ -114,9 +126,10 @@ namespace Cashier
         {
             string searchTerm = tbSearch.Text;
             if(string.IsNullOrEmpty(searchTerm) || Helper.strIsEmpty(searchTerm))
-                RefreshData("");
+               new clsDB().Con().FillLvw(lvManageRecord, sql);
             else
-                RefreshData( StudentAccount.searchAccount(searchTerm));
+                new clsDB().Con().FillLvw(lvManageRecord, StudentAccount.searchAccount(searchTerm));
+                
         }
 
         public void btnPartialPayment_Click(object sender, EventArgs e)
@@ -125,22 +138,29 @@ namespace Cashier
             {
           
                     Student st = new Student(lvManageRecord.CheckedItems[0].SubItems[1].Text);
-                    frmPartialPayment f = new frmPartialPayment();
+                    frmPartialPayment f = new frmPartialPayment(this.lastOPNumber);
                     f.ControlBox = false;
                     f.studentData = st.studentData;
 
                     f.ShowDialog();
+                    
+                    if(f.hasUpdated)
+                        this.lastOPNumber = f.lastOPNumber;
+
                     RefreshData(" ");
     
             }
             else if(!string.IsNullOrEmpty(mtlStudID.Text) && !Helper.strIsEmpty(mtlStudID.Text))
             {
                   Student st = new Student(mtlStudID.Text);
-                frmPartialPayment f = new frmPartialPayment();
+                frmPartialPayment f = new frmPartialPayment(this.lastOPNumber);
                 f.ControlBox = false;
                 f.studentData = st.studentData;
 
                 f.ShowDialog();
+                if(f.hasUpdated)
+                    this.lastOPNumber = f.lastOPNumber;
+
                 RefreshData(" ");
             }
             else
@@ -324,9 +344,12 @@ namespace Cashier
 
         private void metroLink1_Click(object sender, EventArgs e)
         {
-            KeyEventArgs ea = new KeyEventArgs(Keys.Enter);
+            /*KeyEventArgs ea = new KeyEventArgs(Keys.Enter);
 
-            mtbStudent_KeyDown(null, ea);
+            mtbStudent_KeyDown(null, ea);*/
+
+            frmSearchStudent f = new frmSearchStudent();
+            f.Show();
         }
 
         private void metroLink2_Click(object sender, EventArgs e)
@@ -402,7 +425,7 @@ namespace Cashier
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataSet ds = new DataSet();
 
-            string sql = "SELECT DISTINCT TOP 10  CONCAT(LName,',',FName,' ',MName,'(',StudNo,')') FROM Student WHERE StudNo Like '%" + mtbStudent.Text + "%' OR CONCAT(LName,', ', FName) LIKE '%" + mtbStudent.Text + "%'  OR CONCAT(FName,' ',LName) LIKE '%" + mtbStudent.Text +"%'";
+            string sql = "SELECT DISTINCT TOP 20  CONCAT(LName,',',FName,' ',MName,'(',StudNo,')') FROM Student WHERE StudNo Like '%" + mtbStudent.Text + "%' OR CONCAT(LName,', ', FName) LIKE '%" + mtbStudent.Text + "%'  OR CONCAT(FName,' ',LName) LIKE '%" + mtbStudent.Text +"%'";
             connection = new SqlConnection( Connect.ToDB());
             try
             {
@@ -487,6 +510,19 @@ namespace Cashier
                 btnPartialPayment_Click(sender, null);
         }
 
+        private void metroPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            new clsDB().Con().FillLvw(lvOP, opQuery);
+            lbOPCount.Text = "" + OrderOfPayment.getNumberOfOP();
+            lbPaidOPCount.Text = "" + OrderOfPayment.getNumberOfPaidOP();
+        }
+
+ 
     
    
       

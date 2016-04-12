@@ -157,7 +157,7 @@ namespace Cashier.classes
             
 
 
-            offset = offset + (int)fontHeight + 80;
+            offset = offset + (int)fontHeight + 70;
 
             CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString("", new Font("Courier New", 10, FontStyle.Bold)).Width / 2) / 4;
           
@@ -203,7 +203,7 @@ namespace Cashier.classes
             CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString("Sorsogon State College", new Font("Arial", 10, FontStyle.Bold)).Width / 2) / 4;
           
             // Third Line
-            graphic.DrawString("Sorsogon State College", new Font("Arial", 11, FontStyle.Bold), new SolidBrush(Color.Black), CenterPage / 2 + 20, startY + offset - 10 );
+            graphic.DrawString("Sorsogon State College", new Font("Arial", 11), new SolidBrush(Color.Black), CenterPage / 2 + 20, startY + offset - 10 );
             offset = offset + (int)fontHeight + 5;
 
             CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString("", new Font("Arial", 12, FontStyle.Bold)).Width / 2) / 4;
@@ -231,7 +231,7 @@ namespace Cashier.classes
                     tempDiff = particularLength;
 
                 // measure nature of collection name
-                particularLength = Convert.ToInt16(e.Graphics.MeasureString(particularsAmount[i][0], new Font("Arial", 11, FontStyle.Bold)).Width / 2) / 4;
+                particularLength = Convert.ToInt16(e.Graphics.MeasureString(particularsAmount[i][0], new Font("Arial", 11)).Width / 2) / 4;
 
                 if (tempDiff > 0 && tempDiff != particularLength && i != particularsAmount.Length -1)
                     tempDiff = tempDiff - particularLength;
@@ -240,9 +240,9 @@ namespace Cashier.classes
 
                 if (particularsAmount[i][3] !=  "1" || isOtherPayment)
                 {
-                    graphic.DrawString(particularsAmount[i][0] ,new Font("Arial", 11,FontStyle.Bold), new SolidBrush(Color.Black), startX + 10, startY + offset);
-                    graphic.DrawString(particularsAmount[i][1].PadRight(10), new Font("Arial", 11, FontStyle.Bold), new SolidBrush(Color.Black), startX + 225, startY + offset);
-                    graphic.DrawString(particularsAmount[i][2], new Font("Arial", 11, FontStyle.Bold), new SolidBrush(Color.Black), startX + 275, startY + offset);
+                    graphic.DrawString(particularsAmount[i][0] ,new Font("Arial", 11), new SolidBrush(Color.Black), startX + 10, startY + offset);
+                    graphic.DrawString(particularsAmount[i][1].PadRight(10), new Font("Arial", 11), new SolidBrush(Color.Black), startX + 225, startY + offset);
+                    graphic.DrawString(particularsAmount[i][2], new Font("Arial", 11), new SolidBrush(Color.Black), startX + 275, startY + offset);
 
                     if (particularsAmount.Length > 8)
                         offset = offset + (int)fontHeight + 2;
@@ -256,7 +256,10 @@ namespace Cashier.classes
               
                 if(MscAmount > 0 && i == particularsAmount.Length - 1)
                 {
-                    graphic.DrawString("Miscl. Fee".PadRight(28) + " ".PadRight(10) + MscAmount.ToString().PadRight(tempFinal),new Font("Arial", 13), new SolidBrush(Color.Black), startX + 10, startY + offset);
+                    graphic.DrawString("Miscl. Fee", new Font("Arial", 11), new SolidBrush(Color.Black), startX + 10, startY + offset);
+                    graphic.DrawString("  ".PadRight(10), new Font("Arial", 11), new SolidBrush(Color.Black), startX + 225, startY + offset);
+                    graphic.DrawString(MscAmount.ToString() +".00", new Font("Arial", 11), new SolidBrush(Color.Black), startX + 275, startY + offset);
+                    //graphic.DrawString("Miscl. Fee".PadRight(28) + " ".PadRight(10) + MscAmount.ToString().PadRight(tempFinal),new Font("Arial", 11), new SolidBrush(Color.Black), startX + 10, startY + offset);
                 }
                 
             }
@@ -283,13 +286,13 @@ namespace Cashier.classes
                 amountInWords = printData["AmtInWords"];
             }
 
-
-            graphic.DrawString(amount, new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage * 3 - 40 , totalPosY);
+            // Amount - Numeric
+            graphic.DrawString(amount, new Font("Arial", 11 ,FontStyle.Bold), new SolidBrush(Color.Black), CenterPage * 3 - 40 , totalPosY);
            
             totalPosY = totalPosY + (int)fontHeight + 25;
 
             // For Amount in Words
-            graphic.DrawString(amountInWords, new Font("Arial", 10, FontStyle.Bold), new SolidBrush(Color.Black), CenterPage / 4, totalPosY);
+            graphic.DrawString(amountInWords, new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage / 4, totalPosY);
 
             //  if has check or not
             if (!string.IsNullOrEmpty(printData["CheckNo"]) && !string.IsNullOrEmpty(printData["CheckAmount"]))
@@ -310,8 +313,10 @@ namespace Cashier.classes
                 // for the x mark
                 graphic.DrawString("X - Cash", new Font("Arial", 10), new SolidBrush(Color.Black), 30, totalPosY + 40);
             }
-          
 
+            totalPosY = totalPosY + (int)fontHeight + 30;
+            graphic.DrawString("MARILOU G. AGNOTE", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage / 2 + 100, totalPosY + 75);
+            graphic.DrawString("CASHIER III", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage / 2 + 115, totalPosY + 90);
        
         }
 
@@ -322,7 +327,7 @@ namespace Cashier.classes
         {
 
             // ------- VARIABLES -------
-            string queryMain = "SELECT OP.SeqNo,OP.SemNo,OfRec.Date_Paid, OfRec.ORNumber,OP.Payor,OfRec.Amount as ORAmount,OP.DateIssued,OP.OPNo,OP.Amount as OPAmount,OP.Purpose as Purpose,ISNULL(OfRec.PaymentType,0) as PaymentType FROM Collections as OfRec JOIN tbl_PayOrder as OP ON OP.OPNo = OfRec.OPNumber JOIN Collection_Details as CD ON CD.ORNumber = OfRec.ORNumber WHERE Date_Paid = '" + date + "' AND OPType = " + OPType + " " + pageIdentifier + " ORDER BY OfRec.ORNumber   ASC";
+            string queryMain = "SELECT OP.SeqNo,OP.SemNo,OfRec.Date_Paid, OfRec.ORNumber,OP.Payor,OfRec.Amount as ORAmount,OP.DateIssued,OP.OPNo,OP.Amount as OPAmount,OP.Purpose as Purpose,ISNULL(OfRec.PaymentType,0) as PaymentType FROM Collections as OfRec JOIN tbl_PayOrder as OP ON OP.OPNo = OfRec.OPNumber JOIN Collection_Details as CD ON CD.ORNumber = OfRec.ORNumber WHERE Date_Paid = '" + date + "' AND OPType = " + OPType + " " + pageIdentifier + " AND OfRec.PaymentType = " + OPType+" ORDER BY OfRec.ORNumber   ASC";
             string queryTemp = queryMain;
             int xInc = 0, lineCounter = 0, recordCount = new clsDB().Con().countRecord(queryMain);
             OPTotal = 0; ORTotal = 0;
@@ -332,11 +337,16 @@ namespace Cashier.classes
             Font font = new Font("Arial", 10);
 
             PageNo++;
+          
             // *** PRINT HEADER ***
             headerPrintLayout1(graphic, e);
 
+
             // check if For Summary
-            // SUMMARY
+            // ---------------------------------------------------------
+            // -------------------  SUMMARY ----------------------------
+            // ---------------------------------------------------------
+
             if (forSummary)
             {
                 Dictionary<string, float> dataSummary = col.summaryOfCollection(OPType, date);
@@ -354,17 +364,36 @@ namespace Cashier.classes
                 // Main Operation
                 for (int i = 0; i < dataSummary.Count; i++)
                 {
+                  
                     string[] summaryTwo = { "", "", dataSummary.Keys.ToList()[i], Convert.ToString(dataSummary[dataSummary.Keys.ToList()[i]]), "", "", "", "", ""};
 
-                    summaryTotal += dataSummary[dataSummary.Keys.ToList()[i]];
-                    
+                    if (dataSummary.Count > 17 && i < dataSummary.Count)
+                    {
+                        summaryTotal += dataSummary[dataSummary.Keys.ToList()[i]];
+
+                        i++;
+                        try
+                        {
+                            summaryTwo[3] += "\t\t" + dataSummary.Keys.ToList()[i];
+                            summaryTwo[4] = Convert.ToString(dataSummary[dataSummary.Keys.ToList()[i]]);
+                            summaryTotal += dataSummary[dataSummary.Keys.ToList()[i]];
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        
+                    }
+                    else
+                        summaryTotal += dataSummary[dataSummary.Keys.ToList()[i]];
+
                     rowPrinting(graphic, e, xInc, summaryTwo);
                     xInc += 21;
                 }
 
                 // For Summary Total
-                string[] summaryTotalHeader = { "", "", "Total : ", summaryTotal.ToString(), "", "", "", "", "" };
-                rowPrinting(graphic, e, xInc, summaryTotalHeader);
+                string[] summaryTotalHeader = { "", "", "Total : ", "", "  " +summaryTotal.ToString(), "", "", "", "" };
+                rowPrinting(graphic, e, xInc, summaryTotalHeader,true);
 
                 // *** PRINT FOOTER ***
                 footerPrintLayout1(graphic, e);
@@ -375,18 +404,24 @@ namespace Cashier.classes
                 return;
             }
 
-            
+            // ---------------------------------------------------------
+            // -------------------  END OF SUMMARY ---------------------
+            // ---------------------------------------------------------
 
-            // ******* MAIN PROCESS *******
-           
-            for (int j = 0; j < recordCount; j++ )
+
+            // ---------------------------------------------------------
+            // ********************* Main Process  *********************
+            // ---------------------------------------------------------
+
+            //  !!!! START OF LOOP !!!
+            for (int j = 0; j < recordCount; j++)
             {
 
-                
+
                 Dictionary<string, string> reportData = new Dictionary<string, string>();
                 new clsDB().Con().SelectDataDictionary(queryTemp, reportData);
 
-             
+
                 // get Final Particular
 
                 if (reportData.Count() > 0)
@@ -397,7 +432,7 @@ namespace Cashier.classes
 
                     if (int.Parse(reportData["PaymentType"]) == 9)
                     {
-                        string[] data = { reportData["ORNumber"], "Code", "Cancelled", "", "", "", "", "", "" };
+                        string[] data = { reportData["ORNumber"], " ", "Cancelled", "", "", "", "", "", "" };
                         rowPrinting(graphic, e, xInc, data);
                         xInc += 21;
                     }
@@ -408,6 +443,10 @@ namespace Cashier.classes
                         // get Semester 
                         particulars += "-" + Semester.getCurrentSemesterString().Replace("Semester", "Sem").Replace("20", "");
 
+
+
+                        // TEst
+                        //string[] dataA = { reportData["ORNumber"], "Code", reportData["Payor"], particulars, reportData["ORAmount"], reportData["DateIssued"], reportData["OPNo"], reportData["OPAmount"], "" };
                         string[] dataA = { reportData["ORNumber"], "Code", reportData["Payor"], particulars, reportData["ORAmount"], reportData["DateIssued"], reportData["OPNo"], reportData["OPAmount"], "" };
 
                         // Compute Total
@@ -418,10 +457,10 @@ namespace Cashier.classes
                         xInc += 21;
                     }
 
-                   
+
 
                     // quick fix
-                    queryTemp = "SELECT TOP 1 OP.SeqNo,OP.SemNo,OfRec.Date_Paid, OfRec.ORNumber,OP.Payor,OfRec.Amount as ORAmount,OP.DateIssued,OP.OPNo,OP.Amount as OPAmount,OP.Purpose as Purpose,ISNULL(OfRec.PaymentType,0) as PaymentType FROM Collections as OfRec JOIN tbl_PayOrder as OP ON OP.OPNo = OfRec.OPNumber JOIN Collection_Details as CD ON CD.ORNumber = OfRec.ORNumber WHERE Date_Paid = '" + date + "' AND OPType = " + OPType + " AND OPNo >" + reportData["OPNo"];
+                    queryTemp = "SELECT  TOP 1 OP.SeqNo,OP.SemNo,OfRec.Date_Paid, OfRec.ORNumber,OP.Payor,OfRec.Amount as ORAmount,OP.DateIssued,OP.OPNo,OP.Amount as OPAmount,OP.Purpose as Purpose,ISNULL(OfRec.PaymentType,0) as PaymentType FROM Collections as OfRec JOIN tbl_PayOrder as OP ON OP.OPNo = OfRec.OPNumber JOIN Collection_Details as CD ON CD.ORNumber = OfRec.ORNumber WHERE Date_Paid = '" + date + "' AND OPType = " + OPType + " AND OfRec.ORNumber >" + reportData["ORNumber"] + " AND OfRec.PaymentType = " + OPType + " ORDER BY OfRec.ORNumber   ASC";
                     lineCounter++;
                 }
 
@@ -429,12 +468,12 @@ namespace Cashier.classes
                 {
 
                     OPGrandTotal += OPTotal;
-                    ORGrandTotal += ORTotal; 
+                    ORGrandTotal += ORTotal;
                     if (recordCount > 20)
                     {
                         hasMorePages = true;
 
-                        pageIdentifier = " AND OPNo >" + reportData["OPNo"];
+                        pageIdentifier = " AND OfRec.ORNumber >" + reportData["ORNumber"];
                         string[] dataTotal = { "", "", "", "Sub-Total", Convert.ToString(ORTotal), "", "", Convert.ToString(OPTotal), "" };
                         rowPrinting(graphic, e, xInc, dataTotal);
 
@@ -442,13 +481,15 @@ namespace Cashier.classes
                         // *** PRINT FOOTER ***
                         footerPrintLayout1(graphic, e);
                         e.HasMorePages = true;
+                        forSummary = false;
                         return;
                     }
-                   
-                  
+
+
                 }
 
             }
+            //  !!!! END OF LOOP !!!
 
 
             /************ FINAL PRINTING  ***************/
@@ -470,22 +511,22 @@ namespace Cashier.classes
                 e.HasMorePages = false;
                 hasMorePages = false;
             }
-            
-            if(hasMorePages == false)
+
+            if (hasMorePages == false)
             {
                 if (OPGrandTotal == 0 && ORGrandTotal == 0)
                 {
                     OPGrandTotal += OPTotal;
                     ORGrandTotal += ORTotal;
                 }
-   
 
+                
                 string[] dataTotal = { "", "", "", "Sub-Total", Convert.ToString(ORTotal), "", "", Convert.ToString(OPTotal), "" };
                 rowPrinting(graphic, e, xInc, dataTotal);
 
                 string[] dataGrandTotal = { "", "", "", "Grand Total", Convert.ToString(ORGrandTotal), "", "", Convert.ToString(OPGrandTotal), "" };
                 rowPrinting(graphic, e, xInc + 21, dataGrandTotal);
-
+                
 
                 // *** PRINT FOOTER ***
                 footerPrintLayout1(graphic, e);
@@ -494,13 +535,6 @@ namespace Cashier.classes
                 e.HasMorePages = true;
             }
 
-          
-
-
-        
-
-           
-              
             
            
 
@@ -533,12 +567,14 @@ namespace Cashier.classes
             g.DrawString("Sorsogon City", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage, startY + offset);
             offset = offset + (int)fontHeight + 5;
 
-            CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString("MASTERAL", new Font("Arial", 10, FontStyle.Italic)).Width / 2);
+            CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString(OPTypeText, new Font("Arial", 10, FontStyle.Italic)).Width / 2);
             g.DrawString(OPTypeText, new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage, startY + offset);
             offset = offset + (int)fontHeight + 5;
 
 
-            // Report No.
+            // Report No. & Daily Collection
+            CenterPage = Convert.ToInt16(e.PageBounds.Width / 2 - e.Graphics.MeasureString("Daily Collection", new Font("Arial", 10, FontStyle.Italic)).Width / 2);
+            g.DrawString("Daily Collection", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage , startY + offset);
             g.DrawString("Report No. ______________", new Font("Arial", 10), new SolidBrush(Color.Black), (e.PageBounds.Width - 200) - "Report No. ______________".Length, startY + offset);
             g.DrawString("10001", new Font("Arial", 10), new SolidBrush(Color.Black), (e.PageBounds.Width - 150) + "Report No.".Length, startY + offset);
             offset = offset + (int)fontHeight + 3;
@@ -582,7 +618,7 @@ namespace Cashier.classes
 
             offset = offset + (int)fontHeight + 3;
             g.DrawString("Cashier III", new Font("Arial", 10), new SolidBrush(Color.Black), (CenterPage / 4) + 80, startY + offset);
-            g.DrawString("Date", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage + (CenterPage / 4) + 30, startY + offset);
+            g.DrawString("Date Printed", new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage + (CenterPage / 4) + 30, startY + offset);
         }
 
         private void columnHeaderPrinting(Graphics g, PrintPageEventArgs e, int lines, string[] rowPrintData = null, float[] dataPoints = null)
@@ -617,7 +653,7 @@ namespace Cashier.classes
 
         }
 
-        private void rowPrinting(Graphics g, PrintPageEventArgs e, int xInc = 0, string[] rowPrintData = null)
+        private void rowPrinting(Graphics g, PrintPageEventArgs e, int xInc = 0, string[] rowPrintData = null , bool isBold = false)
         {
 
             // adjustments for Table
@@ -648,7 +684,11 @@ namespace Cashier.classes
                 // center 
                 int CenterPage = Convert.ToInt16(x);
 
-                g.DrawString(rowPrintData[i], new Font("Arial", 10), new SolidBrush(Color.Black), CenterPage, y);
+                if(isBold)
+                    g.DrawString(rowPrintData[i], new Font("Arial", 9,FontStyle.Bold), new SolidBrush(Color.Black), CenterPage, y);
+                else
+                    g.DrawString(rowPrintData[i], new Font("Arial", 9), new SolidBrush(Color.Black), CenterPage, y);
+                
                 x += (xSpace + dataPoints[i])/2;
                 
                 //x += xSpace - float.Parse("8.7");

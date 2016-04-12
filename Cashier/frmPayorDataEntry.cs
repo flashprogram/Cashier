@@ -23,7 +23,9 @@ namespace Cashier
 
         public frmPayorDataEntry()
         {
+            
             InitializeComponent();
+            this.Location = new Point(this.Location.X + 100, this.Location.Y);
         }
 
         public void RefreshData(string s = "")

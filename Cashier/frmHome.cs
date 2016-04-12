@@ -15,6 +15,7 @@ namespace Cashier
     {
 
         public delegate void MsgHandler(string msg);
+        public frmMetroMainMenu menu;
         MsgHandler modDbAction;
 
         private Form currForm;
@@ -32,26 +33,29 @@ namespace Cashier
 
         private void showMenu()
         {
-            frmMetroMainMenu f = new frmMetroMainMenu(new MsgHandler(showSelected) );
-            f.Width = this.Width;
-            f.Height = this.Height - ( fileToolStripMenuItem.Height + toolStrip1.Height );
+            menu = new frmMetroMainMenu(new MsgHandler(showSelected) );
+            menu.Width = this.Width;
+            menu.Height = this.Height - (fileToolStripMenuItem.Height + toolStrip1.Height);
 
-            f.ControlBox = false;
-            f.MdiParent = this;
-            f.Show();
+            menu.ControlBox = false;
+            menu.MdiParent = this;
+
+            
+
+            menu.Show();
 
             // validate user type
             User s = new User(loginForm.userID);
-            f.user_type = s.userData["userDept"];
-            f.validateUserType();
+            menu.user_type = s.userData["userDept"];
+            menu.validateUserType();
             // set user details
-            this.btnUser.Text = s.userData["fullname"];
-            this.btnUser.Width += s.userData["fullname"].Length;
+            this.btnUser.Text = s.userData["fullname"].Trim();
+            this.btnUser.Width = 180;
             this.lbDept.Text = s.userData["userDept"];
 
-            f.mtlUser.Text = s.userData["fullname"];
+            menu.mtlUser.Text = s.userData["fullname"];
 
-            f.WindowState = FormWindowState.Maximized;
+            menu.WindowState = FormWindowState.Maximized;
             
         }
 
@@ -218,6 +222,8 @@ namespace Cashier
         {
             isLoggedIn = false;
             btnUser.Tag = "";
+            btnUser.Width = 135;
+            btnUser.Text = "";
             this.lbDept.Text = "";
             showSelected("");
         }
@@ -225,6 +231,11 @@ namespace Cashier
         private void frmHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.ShadowType = MetroFormShadowType.Flat;
+        }
+
+        private void tspStudentLedger_Click(object sender, EventArgs e)
+        {
+
         }       
     }
 }

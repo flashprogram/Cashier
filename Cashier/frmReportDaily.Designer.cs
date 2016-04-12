@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource4 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.cashierDailyReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SCIISDataSet = new Cashier.SCIISDataSet();
             this.dtDailyReportDate = new System.Windows.Forms.DateTimePicker();
@@ -37,12 +37,12 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.cashierDailyReportTableAdapter = new Cashier.SCIISDataSetTableAdapters.cashierDailyReportTableAdapter();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
-            this.cmbOPType = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.mtDetailed = new MetroFramework.Controls.MetroTile();
             this.metroTile3 = new MetroFramework.Controls.MetroTile();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.cmbOPType = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.sciisDataSet11 = new Cashier.SCIISDataSet1();
             ((System.ComponentModel.ISupportInitialize)(this.cashierDailyReportBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SCIISDataSet)).BeginInit();
@@ -82,9 +82,9 @@
             // 
             this.reportViewer1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.reportViewer1.DocumentMapWidth = 44;
-            reportDataSource4.Name = "DataSet2";
-            reportDataSource4.Value = this.cashierDailyReportBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource4);
+            reportDataSource1.Name = "DataSet2";
+            reportDataSource1.Value = this.cashierDailyReportBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Cashier.Reports.DailyReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(43, 482);
             this.reportViewer1.Name = "reportViewer1";
@@ -111,35 +111,6 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
-            // 
-            // cmbOPType
-            // 
-            this.cmbOPType.AutoCompleteCustomSource.AddRange(new string[] {
-            "BTR",
-            "UNDERGRAD",
-            "MASTERAL",
-            "FIDUCIARY",
-            "IGP"});
-            this.cmbOPType.FormattingEnabled = true;
-            this.cmbOPType.Items.AddRange(new object[] {
-            "BTR",
-            "UNDERGRAD",
-            "MASTERAL",
-            "FIDUCIARY",
-            "IGP"});
-            this.cmbOPType.Location = new System.Drawing.Point(467, 63);
-            this.cmbOPType.Name = "cmbOPType";
-            this.cmbOPType.Size = new System.Drawing.Size(121, 21);
-            this.cmbOPType.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(412, 66);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "OP Type";
             // 
             // mtDetailed
             // 
@@ -184,6 +155,35 @@
             this.metroTile1.Text = "Daily Report";
             this.metroTile1.UseSelectable = true;
             this.metroTile1.Click += new System.EventHandler(this.metroTile1_Click);
+            // 
+            // cmbOPType
+            // 
+            this.cmbOPType.AutoCompleteCustomSource.AddRange(new string[] {
+            "BTR",
+            "UNDERGRAD",
+            "MASTERAL",
+            "FIDUCIARY",
+            "IGP"});
+            this.cmbOPType.FormattingEnabled = true;
+            this.cmbOPType.Items.AddRange(new object[] {
+            "BTR",
+            "UNDERGRADUATE",
+            "GRADUATE",
+            "FIDUCIARY",
+            "IGP"});
+            this.cmbOPType.Location = new System.Drawing.Point(467, 63);
+            this.cmbOPType.Name = "cmbOPType";
+            this.cmbOPType.Size = new System.Drawing.Size(121, 21);
+            this.cmbOPType.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(412, 66);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "OP Type";
             // 
             // sciisDataSet11
             // 

@@ -20,14 +20,30 @@ namespace Cashier
         public frmParticularAmountDataEntry()
         {
             InitializeComponent();
+            tbAmount.Text = "" + getAssessmentAmount(assessmentID);
 
         }
         public frmParticularAmountDataEntry(int assessmentID)
         {
             this.assessmentID = assessmentID;
             InitializeComponent();
-
+            tbAmount.Text = "" + getAssessmentAmount(assessmentID);
             
+        }
+
+        public double getAssessmentAmount(int assessmentID = -1)
+        {
+            if(assessmentID >= 0)
+            {
+                string[] data = new string[1];
+                string query = "SELECT TOP 1 ISNULL(Amount,0) FROM Assessment WHERE AssessmentID = "+ assessmentID;
+                
+                new clsDB().Con().SelectData(query,data);
+
+                this.amount = float.Parse(data[0]);
+            }
+
+            return this.amount;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -51,7 +67,7 @@ namespace Cashier
         private void frmParticularAmountDataEntry_Load(object sender, EventArgs e)
         {
             if (isTuitionFee)
-                InfoText.Text = " Input Tuition Fee Amount ";
+                InfoText.Text = " Please Input Amount ";
         }
 
         private void tbAmount_KeyPress(object sender, KeyPressEventArgs e)

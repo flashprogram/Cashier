@@ -13,6 +13,9 @@ namespace Cashier
 {
     public partial class frmPaymentGetOP : MetroForm
     {
+        public int lastORNumber = int.Parse(OrderOfPayment.getLastORNo());
+        public frmMetroMainMenu parent;
+
         public frmPaymentGetOP()
         {
             InitializeComponent();
@@ -27,7 +30,17 @@ namespace Cashier
         private void mtbSearch_Click(object sender, EventArgs e)
         {
             // check if OPNo is valid
-            int OPNo = int.Parse(tOPNo.Text);
+            int OPNo = 0;
+            try
+            {
+                OPNo = int.Parse(tOPNo.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Invalid OP Number");
+                return;
+            }
+
             float temp = 0;
             string query = "SELECT * FROM tbl_PayOrder WHERE OPNo = " + OPNo;
 
@@ -39,11 +52,31 @@ namespace Cashier
                 new clsDB().Con().FillLvw(listView1, query);
                 float[] total = Payor.computeAccount(listView1);
                 temp = total[0] + total[1];
-                frmPaymentDataEntry f = new frmPaymentDataEntry();
+                frmPaymentDataEntry f = new frmPaymentDataEntry(this.lastORNumber);
                 f.total = temp;
                 f.orderOfPaymentNo = OPNo;
                 f.listLength = listView1.Items.Count;
                 f.ShowDialog();
+                this.lastORNumber = f.lastORNumber;
+
+               
+                parent.lbTotalCollection.Text = "" + Cashier.classes.clsCollection.getDailyAccumulatedAmount(DateTime.Now.ToShortDateString());
+                string date = DateTime.Now.ToShortDateString();
+                Cashier.classes.clsCollection c = new Cashier.classes.clsCollection();
+                Dictionary<string, float> summary = c.summaryOfCollection(2, date);
+
+                for (int i = 0; i < summary.Count; i++)
+                {
+                    ListViewItem lvi = new ListViewItem();
+                    lvi.SubItems[0].Text = summary.Keys.ToList()[i];
+                    ListViewItem.ListViewSubItem item = new ListViewItem.ListViewSubItem();
+                    item.Text = Convert.ToString(summary[summary.Keys.ToList()[i]]);
+                    lvi.SubItems.Add(item);
+
+
+                    parent.lvSummaryOfCollection.Items.Add(lvi);
+
+                }
             }
             else
             {
@@ -82,6 +115,74 @@ namespace Cashier
         {
             
             tOPNo.Focus();
+        }
+
+        private void mtbDeleteOR_Click(object sender, EventArgs e)
+        {
+            if (mtbDeleteOR.Tag.ToString() == "ViewDelete")
+            {
+                gbORDELETE.Visible = true;
+                mtbDeleteOR.Tag = "DeleteOR";
+                mtbDeleteOR.Text = "Confirm Delete";
+            }
+
+            if (mtbDeleteOR.Tag.ToString() == "DeleteOR")
+            {
+
+                if (!string.IsNullOrEmpty(tbORNoDelete.Text) && int.Parse(tbORNoDelete.Text) > 0)
+                {
+                    try
+                    {
+
+                        // transfer Data for Future reference
+                        clsCollection collection = new clsCollection(int.Parse(tbORNoDelete.Text));
+                        Dictionary<string,string> collectionData = collection.collectionData;
+                        
+                        string[][] collectionItems = collection.getCollectionItem(int.Parse(tbORNoDelete.Text));
+                        string collectionItemsSummary = "";
+                        for (int i = 0; i < collectionItems.Count(); i++)
+                        {
+                            collectionItemsSummary += collectionItems[i][0].ToString() + " : " + collectionItems[i][2].ToString() +" , ";
+                        }
+
+                        string collectionDetails = " { " +
+                                                   "   OPNumber : " + collectionData["OPNumber"] + "," +
+                                                   "   Date_Paid : " + collectionData["Date_Paid"] + "," +
+                                                   "   Payor : " + collectionData["Payor"] + "," +
+                                                   " Amount : " + collectionData["OPNumber"] + "," +
+                                                   "   PaymentType : " + collectionData["PaymentType"] + "," +
+                                                   "   CollectionDetails : {  " +
+                                                   "   " + collectionItemsSummary + " } }";
+
+                        string insertQuery = "INSERT INTO collection_deleted(ORNumber,Collection_Details) VALUES(" + int.Parse(tbORNoDelete.Text) + ",'" + collectionDetails + "' )";
+
+                        if (new clsDB().Con().ExecuteSql(insertQuery))
+                        {
+                            string query = "DELETE FROM Collections WHERE ORNumber = " + tbORNoDelete.Text;
+                            if (new clsDB().Con().ExecuteSql(query))
+                            {
+                                query = "DELETE FROM Collection_Details WHERE ORNumber = " + tbORNoDelete.Text;
+                                if (new clsDB().Con().ExecuteSql(query))
+                                {
+                                    mtbDeleteOR.Text = "Delete OR";
+                                    mtbDeleteOR.Tag = "ViewDelete";
+                                    gbDetails.Visible = false;
+                                    MessageBox.Show("Delete Successful");
+                                }
+                            }
+                        }
+
+                       
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Invalid ORNo - Error Message : " + ex.Message);
+                    }
+                }
+
+           
+            }
         }
 
     }

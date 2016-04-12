@@ -29,6 +29,9 @@ namespace Cashier.classes
        public string checkDate;
        public float checkAmount;
 
+       // array
+       public int[] OPDetailsPerDay = new int[2];
+
 
        public Dictionary<string,string> orderOfPaymentDetails = new Dictionary<string,string>();
       
@@ -305,6 +308,16 @@ namespace Cashier.classes
            return hasRecord;
        }
 
+       public int[] OPPerDay(string date)
+       {
+           // OPDetails per day index - 1 = No of OP - 2 No of Paid OP
+
+           OPDetailsPerDay[0] = OrderOfPayment.getNumberOfOP();
+           OPDetailsPerDay[1] = OrderOfPayment.getNumberOfPaidOP();
+
+           return OPDetailsPerDay;
+       }
+
 
 
         // static functions
@@ -331,10 +344,36 @@ namespace Cashier.classes
 
        public static int getNumberOfOP()
        {
-           string query = "SELECT OPNo From tbl_PayOrder WHERE DateIssued = " + DateTime.Now.ToShortDateString();
-           int NoOfOP = new clsDB().Con().countRecord(query);
+           int NoOfOP = 0;
+           try
+           {
+               string query = "SELECT OPNo From tbl_PayOrder WHERE DateIssued = '" + DateTime.Now.ToShortDateString()+"'";
+               NoOfOP = new clsDB().Con().countRecord(query);
 
+               
+           }
+           catch (Exception ex)
+           {
+               MessageBox.Show(ex.Message);
+           }
            return NoOfOP;
+       }
+
+       public static int getNumberOfPaidOP()
+       {
+           int NoOfPaidOP = 0;
+           try
+           {
+               string query = "SELECT OPNo From tbl_PayOrder WHERE ISNULL(Paid,0) = 1 AND DateIssued = '" + DateTime.Now.ToShortDateString()+"'";
+               NoOfPaidOP = new clsDB().Con().countRecord(query);
+           }
+           catch (Exception ex)
+           {
+               MessageBox.Show(ex.Message);
+           }
+       
+
+           return NoOfPaidOP;
        }
 
        public static int assessmentID(string particular)
@@ -348,6 +387,7 @@ namespace Cashier.classes
            return assessmentID;
        }
        
+      
 
 
       

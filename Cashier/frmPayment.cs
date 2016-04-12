@@ -83,6 +83,7 @@ namespace Cashier
             {
                 lbPaid.Visible = false;
                 btnPay.Enabled = true;
+                btnPay.Text = "Pay";
                 lbPaid.Text = "PAID( OR # ";
                 orderOfPaymentID = int.Parse(lvManageRecord.SelectedItems[0].SubItems[0].Text);
 
@@ -107,6 +108,7 @@ namespace Cashier
                 if (OP.hasORNumber(orderOfPaymentID))
                 {
                     btnPay.Enabled = false;
+                    btnPay.Text = "PAID";
                     lbPaid.Visible = true;
                     lbPaid.Text += OP.ORNumber.ToString() +")";
                 }
@@ -163,7 +165,7 @@ namespace Cashier
         private void mtcHideOP_CheckedChanged(object sender, EventArgs e)
         {
             if (mtcHideOP.Checked)
-                RefreshData("SELECT OPNo, OP.Amount, OP.Payor, ISNULL(Paid, 0 ) as PAID From tbl_PayOrder as OP RIGHT JOIN Collections as col on col.OPNumber = OP.OPNo ");
+                RefreshData("SELECT OPNo, OP.Amount, OP.Payor, ISNULL(Paid, 0 ) as PAID From tbl_PayOrder as OP RIGHT OUTER JOIN Collections as col on col.OPNumber = OP.OPNo WHERE Paid = 0");
             else
                 RefreshData(sql);
         }
@@ -171,6 +173,16 @@ namespace Cashier
         private void frmPayment_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void lollipopLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            new clsDB().Con().FillLvw(lvManageRecord, sql);
         }
 
 

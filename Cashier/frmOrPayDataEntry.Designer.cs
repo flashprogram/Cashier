@@ -153,9 +153,11 @@
             // 
             // tPaymentOrNo
             // 
+            this.tPaymentOrNo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tPaymentOrNo.ForeColor = System.Drawing.Color.Navy;
             this.tPaymentOrNo.Location = new System.Drawing.Point(246, 81);
             this.tPaymentOrNo.Name = "tPaymentOrNo";
-            this.tPaymentOrNo.Size = new System.Drawing.Size(183, 22);
+            this.tPaymentOrNo.Size = new System.Drawing.Size(183, 23);
             this.tPaymentOrNo.TabIndex = 5;
             // 
             // groupBox1
@@ -273,6 +275,8 @@
             this.clmStudID,
             this.clmParticulars,
             this.clmAmount});
+            this.lvDataEntryOP.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvDataEntryOP.ForeColor = System.Drawing.Color.DarkSlateBlue;
             this.lvDataEntryOP.FullRowSelect = true;
             this.lvDataEntryOP.GridLines = true;
             this.lvDataEntryOP.Location = new System.Drawing.Point(17, 48);
@@ -671,10 +675,10 @@
             // tAmount
             // 
             this.tAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tAmount.Font = new System.Drawing.Font("Segoe UI Semibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tAmount.Location = new System.Drawing.Point(460, 54);
             this.tAmount.Name = "tAmount";
-            this.tAmount.Size = new System.Drawing.Size(254, 44);
+            this.tAmount.Size = new System.Drawing.Size(254, 50);
             this.tAmount.TabIndex = 5;
             this.tAmount.Enter += new System.EventHandler(this.tAmount_Enter);
             this.tAmount.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tAmount_KeyDown);
@@ -711,6 +715,8 @@
             this.groupBox3.Controls.Add(this.mrbFiduciary);
             this.groupBox3.Controls.Add(this.mrbMasteral);
             this.groupBox3.Controls.Add(this.mrbUndergrad);
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.OrangeRed;
             this.groupBox3.Location = new System.Drawing.Point(540, 56);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(210, 58);

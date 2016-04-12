@@ -47,12 +47,11 @@
             // InfoText
             // 
             this.InfoText.AutoSize = true;
-            this.InfoText.Location = new System.Drawing.Point(12, 55);
+            this.InfoText.Location = new System.Drawing.Point(165, 68);
             this.InfoText.Name = "InfoText";
-            this.InfoText.Size = new System.Drawing.Size(421, 13);
+            this.InfoText.Size = new System.Drawing.Size(78, 13);
             this.InfoText.TabIndex = 3;
-            this.InfoText.Text = "It seems like this particular assessment has no amount kindly input an amount :  " +
-    "";
+            this.InfoText.Text = "Input amount";
             // 
             // tbAmount
             // 

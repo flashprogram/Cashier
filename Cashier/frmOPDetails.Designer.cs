@@ -62,17 +62,18 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "ItemNo";
+            this.columnHeader1.Text = "Particular";
+            this.columnHeader1.Width = 162;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Particular";
-            this.columnHeader2.Width = 200;
+            this.columnHeader2.Text = "AssessmentID";
+            this.columnHeader2.Width = 173;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Amount";
-            this.columnHeader3.Width = 154;
+            this.columnHeader3.Width = 117;
             // 
             // mtOPNo
             // 

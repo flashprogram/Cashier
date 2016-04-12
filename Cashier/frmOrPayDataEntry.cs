@@ -25,12 +25,22 @@ namespace Cashier
         private static int[] seqNo;
         private static int tuitionMarker;
 
-        public bool isTuitionFee = false;
+        public bool isTuitionFee = false, hasUpdated = false;
+        public int lastOPNumber;
        
-        public frmOrPayDataEntry()
+        public frmOrPayDataEntry(int lastOPNumber = 0)
         {
             InitializeComponent();
-            tPaymentOrNo.Text = OrderOfPayment.getLastOPNo();
+            //tPaymentOrNo.Text = OrderOfPayment.getLastOPNo();
+         
+
+            if (lastOPNumber > 0)
+            {
+                this.lastOPNumber = lastOPNumber + 1;
+                tPaymentOrNo.Text = "" + this.lastOPNumber;
+            }
+            
+            
             new clsDB().Con().FillCombobox(cmbParticular, "SELECT AssessmentName FROM assessment");
 
             // ***** HOTKEYS *******
@@ -62,13 +72,13 @@ namespace Cashier
 
         //  "show as" functions
 
-        public static void show_asAdd(frmOrPayManageData.MsgHandler msg)
+        public static frmOrPayDataEntry show_asAdd(frmOrPayManageData.MsgHandler msg, int lastOPNumber = 0)
         {
 
             dbAction = "add";
             modRefreshData = msg;
 
-            frmOrPayDataEntry f = new frmOrPayDataEntry();
+            frmOrPayDataEntry f = new frmOrPayDataEntry(lastOPNumber);
 
             if (studentData != null && checkedItems != null)
             {
@@ -76,21 +86,20 @@ namespace Cashier
 
                 f.tbFirstname.Visible = false;
                 f.tbLastname.Visible = false;
-                f.tbMiddlename.Visible = false;
-
-            
+                f.tbMiddlename.Visible = false;     
 
             }
       
 
             f.showPayor(f);
+            return f;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (lvDataEntryOP.Items.Count > 0)
             {
-                float total = float.Parse(lbTotal.Text);
+                double total = double.Parse(lbTotal.Text);
 
                 if (total > 0 && (!string.IsNullOrEmpty(tbFirstname.Text) && !string.IsNullOrEmpty(tbLastname.Text)))
                 {
@@ -128,10 +137,10 @@ namespace Cashier
                     // has check details
                     if (Payor.validateCheckDetails(mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), mtbCheckAmount.Text) && mtrbCheck.Checked)
                     {
-                        OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), purpose, payor, studentID, tbRemarks.Text, mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), float.Parse(mtbCheckAmount.Text),int.Parse(paymentType));
+                        OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), purpose, payor, studentID, tbRemarks.Text, mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), float.Parse(mtbCheckAmount.Text),orderOfPaymentType);
                     }
                     else if (mtrbCash.Checked)
-                        OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), purpose, payor, studentID, tbRemarks.Text, null, null, null, 0, int.Parse(paymentType));
+                        OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), purpose, payor, studentID, tbRemarks.Text, null, null, null, 0, orderOfPaymentType);
                     else
                         MessageBox.Show("There are some fields missing!");
                     // final validation
@@ -145,12 +154,16 @@ namespace Cashier
                             Dictionary<string, string> OPData = OP.getOPDataWOOR(int.Parse(tPaymentOrNo.Text));
                             ePrinting print = new ePrinting(OPData);
                             print.ePrint("OP");
+                            
+                            this.hasUpdated = true;
+
+                            this.lastOPNumber = int.Parse(tPaymentOrNo.Text);
 
                             this.Dispose();
-                            frmOrPayDataEntry  temp  = new frmOrPayDataEntry();
-                            temp.ShowDialog();
+                           // frmOrPayDataEntry  temp  = new frmOrPayDataEntry(this.lastOPNumber++);
+                            //temp.ShowDialog();
 
-
+                           
                         }
                     }
                     
@@ -251,7 +264,7 @@ namespace Cashier
                         {
                             data[0] = obj;
                             // check if the amount is zero and ask for input
-                            if (float.Parse(data[0][2]) == 0 || data[0][1] == "Tuition Fee")
+                            if (float.Parse(data[0][2]) >= 0 || data[0][1] == "Tuition Fee")
                             {
                                 frmParticularAmountDataEntry f = new frmParticularAmountDataEntry(int.Parse(data[0][0]));
                                 
@@ -328,6 +341,7 @@ namespace Cashier
         private void btnPayor_Click(object sender, EventArgs e)
         {
             frmPayorDataEntry f = new frmPayorDataEntry();
+        
             f.ShowDialog();
 
             if (f.wName.Count() > 0)
@@ -434,7 +448,7 @@ namespace Cashier
         private void btnPayor_Enter(object sender, EventArgs e)
         {
            
-            metroToolTip1.Show("Select Payor or Add new payor", btnPayor, btnPayor.Width,btnPayor.Height,10000000);
+            metroToolTip1.Show("Select Payor or Add new payor", btnPayor, btnPayor.Width - 200,btnPayor.Height,10000000);
             metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
         }
 

@@ -40,12 +40,12 @@ namespace Cashier
         private void btnCancel_Click(object sender, EventArgs e)
         {
 
-            DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Exit!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+           // DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Exit!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (dr == DialogResult.Yes)
-            {
+           // if (dr == DialogResult.Yes)
+           // {
                 Close();
-            }
+           // }
         }
          
 

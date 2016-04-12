@@ -49,17 +49,18 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.mtcHideOP = new MetroFramework.Controls.MetroCheckBox();
-            this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
             this.clmPayor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmPaid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label7 = new System.Windows.Forms.Label();
             this.metroCheckBox2 = new MetroFramework.Controls.MetroCheckBox();
-            this.metroCheckBox3 = new MetroFramework.Controls.MetroCheckBox();
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.metroTile2 = new MetroFramework.Controls.MetroTile();
+            this.metroTile3 = new MetroFramework.Controls.MetroTile();
+            this.metroTile4 = new MetroFramework.Controls.MetroTile();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -74,26 +75,26 @@
             this.clmPaid});
             this.lvManageRecord.FullRowSelect = true;
             this.lvManageRecord.Location = new System.Drawing.Point(55, 91);
-            this.lvManageRecord.Size = new System.Drawing.Size(347, 343);
+            this.lvManageRecord.Size = new System.Drawing.Size(406, 343);
             this.lvManageRecord.SmallImageList = this.imageList1;
             this.lvManageRecord.SelectedIndexChanged += new System.EventHandler(this.lvManageRecord_SelectedIndexChanged);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(245, 13);
+            this.btnSearch.Location = new System.Drawing.Point(310, 12);
             this.btnSearch.Visible = false;
             // 
             // tbSearch
             // 
             this.tbSearch.Location = new System.Drawing.Point(30, 15);
-            this.tbSearch.Size = new System.Drawing.Size(209, 20);
+            this.tbSearch.Size = new System.Drawing.Size(274, 20);
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Location = new System.Drawing.Point(55, 430);
-            this.groupBox1.Size = new System.Drawing.Size(347, 45);
+            this.groupBox1.Size = new System.Drawing.Size(406, 45);
             this.groupBox1.Text = "Filter";
             // 
             // lollipopSmallCard1
@@ -115,7 +116,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Amount";
-            this.columnHeader2.Width = 65;
+            this.columnHeader2.Width = 78;
             // 
             // listView1
             // 
@@ -190,9 +191,10 @@
             this.lollipopLabel1.Location = new System.Drawing.Point(55, 60);
             this.lollipopLabel1.Name = "lollipopLabel1";
             this.lollipopLabel1.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.lollipopLabel1.Size = new System.Drawing.Size(347, 31);
+            this.lollipopLabel1.Size = new System.Drawing.Size(406, 31);
             this.lollipopLabel1.TabIndex = 9;
             this.lollipopLabel1.Text = " Order Of Payment List";
+            this.lollipopLabel1.Click += new System.EventHandler(this.lollipopLabel1_Click);
             // 
             // lbFName
             // 
@@ -207,12 +209,15 @@
             // 
             // btnPay
             // 
-            this.btnPay.BackColor = System.Drawing.Color.Transparent;
+            this.btnPay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(182)))), ((int)(((byte)(121)))));
             this.btnPay.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.btnPay.FlatAppearance.BorderSize = 5;
-            this.btnPay.Location = new System.Drawing.Point(10, 69);
+            this.btnPay.FlatAppearance.BorderSize = 0;
+            this.btnPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPay.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPay.ForeColor = System.Drawing.Color.Maroon;
+            this.btnPay.Location = new System.Drawing.Point(2, 65);
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(33, 32);
+            this.btnPay.Size = new System.Drawing.Size(43, 36);
             this.btnPay.TabIndex = 13;
             this.btnPay.Text = "Pay";
             this.btnPay.UseVisualStyleBackColor = false;
@@ -233,10 +238,11 @@
             // 
             this.lbPaid.AutoSize = true;
             this.lbPaid.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.lbPaid.ForeColor = System.Drawing.Color.Firebrick;
-            this.lbPaid.Location = new System.Drawing.Point(202, 37);
+            this.lbPaid.Font = new System.Drawing.Font("Segoe UI Semibold", 8.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPaid.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lbPaid.Location = new System.Drawing.Point(201, 22);
             this.lbPaid.Name = "lbPaid";
-            this.lbPaid.Size = new System.Drawing.Size(70, 13);
+            this.lbPaid.Size = new System.Drawing.Size(73, 15);
             this.lbPaid.TabIndex = 15;
             this.lbPaid.Text = "PAID ( OR # ";
             this.lbPaid.Visible = false;
@@ -263,7 +269,7 @@
             this.mtcHideOP.AutoSize = true;
             this.mtcHideOP.BackColor = System.Drawing.Color.SteelBlue;
             this.mtcHideOP.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.mtcHideOP.Location = new System.Drawing.Point(282, 62);
+            this.mtcHideOP.Location = new System.Drawing.Point(249, 70);
             this.mtcHideOP.Name = "mtcHideOP";
             this.mtcHideOP.Size = new System.Drawing.Size(93, 15);
             this.mtcHideOP.TabIndex = 17;
@@ -273,47 +279,21 @@
             this.mtcHideOP.UseSelectable = true;
             this.mtcHideOP.CheckedChanged += new System.EventHandler(this.mtcHideOP_CheckedChanged);
             // 
-            // metroCheckBox1
-            // 
-            this.metroCheckBox1.AutoSize = true;
-            this.metroCheckBox1.BackColor = System.Drawing.Color.SteelBlue;
-            this.metroCheckBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.metroCheckBox1.Location = new System.Drawing.Point(282, 76);
-            this.metroCheckBox1.Name = "metroCheckBox1";
-            this.metroCheckBox1.Size = new System.Drawing.Size(120, 15);
-            this.metroCheckBox1.TabIndex = 18;
-            this.metroCheckBox1.Text = "Show Payor Name";
-            this.metroCheckBox1.UseCustomBackColor = true;
-            this.metroCheckBox1.UseCustomForeColor = true;
-            this.metroCheckBox1.UseSelectable = true;
-            // 
             // clmPayor
             // 
             this.clmPayor.Text = "Payor";
-            this.clmPayor.Width = 119;
+            this.clmPayor.Width = 138;
             // 
             // clmPaid
             // 
             this.clmPaid.Text = "Is Paid";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.label7.ForeColor = System.Drawing.Color.Firebrick;
-            this.label7.Location = new System.Drawing.Point(202, 37);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "PAID ( OR # ";
-            this.label7.Visible = false;
             // 
             // metroCheckBox2
             // 
             this.metroCheckBox2.AutoSize = true;
             this.metroCheckBox2.BackColor = System.Drawing.Color.SteelBlue;
             this.metroCheckBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.metroCheckBox2.Location = new System.Drawing.Point(282, 62);
+            this.metroCheckBox2.Location = new System.Drawing.Point(249, 70);
             this.metroCheckBox2.Name = "metroCheckBox2";
             this.metroCheckBox2.Size = new System.Drawing.Size(93, 15);
             this.metroCheckBox2.TabIndex = 17;
@@ -322,20 +302,6 @@
             this.metroCheckBox2.UseCustomForeColor = true;
             this.metroCheckBox2.UseSelectable = true;
             this.metroCheckBox2.CheckedChanged += new System.EventHandler(this.mtcHideOP_CheckedChanged);
-            // 
-            // metroCheckBox3
-            // 
-            this.metroCheckBox3.AutoSize = true;
-            this.metroCheckBox3.BackColor = System.Drawing.Color.SteelBlue;
-            this.metroCheckBox3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.metroCheckBox3.Location = new System.Drawing.Point(282, 76);
-            this.metroCheckBox3.Name = "metroCheckBox3";
-            this.metroCheckBox3.Size = new System.Drawing.Size(120, 15);
-            this.metroCheckBox3.TabIndex = 18;
-            this.metroCheckBox3.Text = "Show Payor Name";
-            this.metroCheckBox3.UseCustomBackColor = true;
-            this.metroCheckBox3.UseCustomForeColor = true;
-            this.metroCheckBox3.UseSelectable = true;
             // 
             // columnHeader9
             // 
@@ -360,29 +326,74 @@
             // 
             this.groupBox4.Controls.Add(this.groupBox2);
             this.groupBox4.Controls.Add(this.listView1);
-            this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.lbFName);
             this.groupBox4.Controls.Add(this.btnPay);
             this.groupBox4.Controls.Add(this.lbPaid);
             this.groupBox4.Controls.Add(this.lbDate);
             this.groupBox4.Controls.Add(this.lollipopSmallCard1);
             this.groupBox4.Controls.Add(this.metroTile1);
-            this.groupBox4.Location = new System.Drawing.Point(422, 54);
+            this.groupBox4.Location = new System.Drawing.Point(480, 54);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(338, 421);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "...";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRefresh.Location = new System.Drawing.Point(379, 64);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 20;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // metroTile2
+            // 
+            this.metroTile2.ActiveControl = null;
+            this.metroTile2.Location = new System.Drawing.Point(824, 60);
+            this.metroTile2.Name = "metroTile2";
+            this.metroTile2.Size = new System.Drawing.Size(97, 75);
+            this.metroTile2.TabIndex = 21;
+            this.metroTile2.Text = "Unpaid OP";
+            this.metroTile2.UseSelectable = true;
+            // 
+            // metroTile3
+            // 
+            this.metroTile3.ActiveControl = null;
+            this.metroTile3.Location = new System.Drawing.Point(824, 141);
+            this.metroTile3.Name = "metroTile3";
+            this.metroTile3.Size = new System.Drawing.Size(97, 75);
+            this.metroTile3.TabIndex = 22;
+            this.metroTile3.Text = "Paid OP";
+            this.metroTile3.UseSelectable = true;
+            // 
+            // metroTile4
+            // 
+            this.metroTile4.ActiveControl = null;
+            this.metroTile4.Location = new System.Drawing.Point(824, 222);
+            this.metroTile4.Name = "metroTile4";
+            this.metroTile4.Size = new System.Drawing.Size(97, 75);
+            this.metroTile4.TabIndex = 23;
+            this.metroTile4.Text = "Cancelled OP";
+            this.metroTile4.UseSelectable = true;
+            // 
             // frmPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 527);
+            this.ClientSize = new System.Drawing.Size(963, 527);
+            this.Controls.Add(this.metroTile4);
+            this.Controls.Add(this.metroTile3);
+            this.Controls.Add(this.metroTile2);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.metroCheckBox3);
             this.Controls.Add(this.metroCheckBox2);
-            this.Controls.Add(this.metroCheckBox1);
             this.Controls.Add(this.mtcHideOP);
             this.Controls.Add(this.lollipopLabel1);
             this.Name = "frmPayment";
@@ -391,12 +402,14 @@
             this.Load += new System.EventHandler(this.frmPayment_Load);
             this.Controls.SetChildIndex(this.lollipopLabel1, 0);
             this.Controls.SetChildIndex(this.mtcHideOP, 0);
-            this.Controls.SetChildIndex(this.metroCheckBox1, 0);
             this.Controls.SetChildIndex(this.metroCheckBox2, 0);
-            this.Controls.SetChildIndex(this.metroCheckBox3, 0);
             this.Controls.SetChildIndex(this.groupBox4, 0);
+            this.Controls.SetChildIndex(this.btnRefresh, 0);
+            this.Controls.SetChildIndex(this.metroTile2, 0);
             this.Controls.SetChildIndex(this.lvManageRecord, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.metroTile3, 0);
+            this.Controls.SetChildIndex(this.metroTile4, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -428,16 +441,17 @@
         private System.Windows.Forms.ImageList imageList1;
         private MetroFramework.Controls.MetroTile metroTile1;
         private MetroFramework.Controls.MetroCheckBox mtcHideOP;
-        private MetroFramework.Controls.MetroCheckBox metroCheckBox1;
         private System.Windows.Forms.ColumnHeader clmPayor;
         private System.Windows.Forms.ColumnHeader clmPaid;
-        private System.Windows.Forms.Label label7;
         private MetroFramework.Controls.MetroCheckBox metroCheckBox2;
-        private MetroFramework.Controls.MetroCheckBox metroCheckBox3;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnRefresh;
+        private MetroFramework.Controls.MetroTile metroTile2;
+        private MetroFramework.Controls.MetroTile metroTile3;
+        private MetroFramework.Controls.MetroTile metroTile4;
     }
 }

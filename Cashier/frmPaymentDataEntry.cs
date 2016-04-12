@@ -15,38 +15,31 @@ namespace Cashier
         private bool isValid = false;
         public float total;
         public int orderOfPaymentNo;
-        public int listLength;
+        public int listLength , lastORNumber;
          OrderOfPayment OP ;
         public Dictionary<string, string> OPData ;
 
-        public frmPaymentDataEntry()
+        public frmPaymentDataEntry(int lastORNumber = 0)
         {
             InitializeComponent();
-            tbORNo.Text = OrderOfPayment.getLastORNo();
+
+            if (lastORNumber > 0)
+            {
+                this.lastORNumber = lastORNumber + 1;
+                tbORNo.Text = "" + this.lastORNumber;
+            }
+
+
+            
+
+           // tbORNo.Text = OrderOfPayment.getLastORNo();
             OP = new OrderOfPayment();
             
         }
 
         private void tbAmount_TextChanged(object sender, EventArgs e)
         {
-            if (Helper.IsNumeric(tbAmount.Text))
-            {
-                tbAmount.BackColor = Color.White;
-
-                // Compute Change After amount > total
-                if (float.Parse(tbAmount.Text) >= total)
-                {
-                    float temp = float.Parse(tbAmount.Text) - total;
-                    lbChange.Text = Convert.ToString(temp);
-                }
-
-                isValid = true;
-            }
-            else
-            {
-                tbAmount.BackColor = Color.Maroon;
-                isValid = false;
-            }
+            
         }
 
 
@@ -101,17 +94,19 @@ namespace Cashier
             // Final Procedure
             if (hasPayment)
             {
-                string checkAmount = null, checkDate = null, checkNo = null, bankName = null, PaymentType = null ;
+                string checkAmount = null, checkDate = null, checkNo = null, bankName = null, PaymentType = null, ORDate = null ;
                 
                 OPData.TryGetValue("CheckAmount", out checkAmount);
                 OPData.TryGetValue("CheckNo", out checkNo);
                 OPData.TryGetValue("CheckDate", out checkDate);
                 OPData.TryGetValue("BankName", out bankName);
-                 OPData.TryGetValue("PaymentType", out PaymentType);
+                OPData.TryGetValue("PaymentType", out PaymentType);
+
+                 ORDate = dtORDate.Value.ToShortDateString();
 
   
 
-                clsCollection col = new clsCollection(orderOfPaymentNo, int.Parse(OrderOfPayment.getLastORNo()), dtORDate.Value.ToShortDateString(), float.Parse(tbAmount.Text), OPData["Payor"].Replace("'","''"), checkNo,bankName, checkDate, float.Parse(checkAmount), int.Parse(PaymentType));
+                clsCollection col = new clsCollection(orderOfPaymentNo, int.Parse(tbORNo.Text), dtORDate.Value.ToShortDateString(), float.Parse(tbAmount.Text), OPData["Payor"].Replace("'","''"), checkNo,bankName, checkDate, float.Parse(checkAmount), int.Parse(PaymentType));
 
                 if (OP.updateOP(int.Parse(tbORNo.Text), orderOfPaymentNo))
                     if (col.create())
@@ -122,7 +117,7 @@ namespace Cashier
                         string[][] particularsAmount = OP.getOrderOfPaymentItem(orderOfPaymentNo);
 
                         OPData["collectionDate"] = dtORDate.Value.ToShortDateString();
-                        int currOrNumber = int.Parse(OrderOfPayment.getLastORNo()) - 1;
+                        int currOrNumber = int.Parse(tbORNo.Text);
                         OPData["ORNumber"] = ""+currOrNumber;
                         
                         ePrinting print = new ePrinting(OPData, particularsAmount);
@@ -132,7 +127,11 @@ namespace Cashier
                             print.isOtherPayment = true;
 
                         print.ePrint("OR");
+                        this.lastORNumber = int.Parse(tbORNo.Text);
+
+                     
                         
+
                         Close();
                     }
             }
@@ -203,6 +202,56 @@ namespace Cashier
             {
                 btnSave_Click(null, null);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (Helper.IsNumeric(tbAmountTendered.Text))
+            {
+                tbAmountTendered.BackColor = Color.White;
+
+                // Compute Change After amount > total
+                if (float.Parse(tbAmountTendered.Text) >= total)
+                {
+                    float temp = float.Parse(tbAmountTendered.Text) - total;
+                    lbChange.Text = Convert.ToString(temp);
+                }
+
+                isValid = true;
+            }
+            else
+            {
+                tbAmountTendered.BackColor = Color.Maroon;
+                isValid = false;
+            }
+        }
+
+        private void tbAmountTendered_Enter(object sender, EventArgs e)
+        {
+            metroToolTip1.Show("Press ENTER to submit and print *", tbAmountTendered, tbAmountTendered.Width / 2, tbAmountTendered.Height, 10000000);
+            metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+        }
+
+        private void tbAmountTendered_Leave(object sender, EventArgs e)
+        {
+            metroToolTip1.Hide(tbAmountTendered);
+        }
+
+        private void tbORNo_Enter(object sender, EventArgs e)
+        {
+            metroToolTip1.Show("Press `Tab` for amount tendered", tbORNo, tbORNo.Width, 0, 10000000);
+            metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+        }
+
+        private void tbORNo_Leave(object sender, EventArgs e)
+        {
+            metroToolTip1.Hide(tbORNo);
+        }
+
+        private void tbAmountTendered_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                btnSave_Click(null, null);
         }
 
   

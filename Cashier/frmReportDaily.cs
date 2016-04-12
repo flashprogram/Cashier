@@ -46,7 +46,7 @@ namespace Cashier
             print.isLandscape = true;
             print.forReport = true;
             print.date = dtDailyReportDate.Value.ToShortDateString();
-            print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRAD") ? 2 : (cmbOPType.Text == "MASTERAL") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
+            print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRADUATE") ? 2 : (cmbOPType.Text == "GRADUATE") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
             print.OPTypeText = cmbOPType.Text;
             
             print.ePrint("DRLayoutOne");
@@ -58,7 +58,7 @@ namespace Cashier
             print.isLandscape = true;
             print.forReport = true;
             print.date = dtDailyReportDate.Value.ToShortDateString();
-            print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRAD") ? 2 : (cmbOPType.Text == "MASTERAL") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
+            print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRADUATE") ? 2 : (cmbOPType.Text == "GRADUATE") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
             print.OPTypeText = cmbOPType.Text;
 
             print.ePrint("DRLayoutOne");

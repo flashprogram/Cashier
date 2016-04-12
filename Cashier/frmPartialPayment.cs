@@ -14,18 +14,25 @@ namespace Cashier
     {
         public string[] studentData;
         bool isFullPayment = false;
-        public bool hasNSTP = false;
+        public bool hasNSTP = false, hasUpdated = false;
+        public int lastOPNumber = 0;
         StudentAccount SAccount = new StudentAccount();
 
-        public frmPartialPayment()
+        public frmPartialPayment(int lastOPNumber = 0)
         {
+
             InitializeComponent();
-  
+
+            if (lastOPNumber > 0)
+            {
+                this.lastOPNumber = lastOPNumber + 1;
+                tPaymentOrNo.Text = ""+this.lastOPNumber;
+            }
         }
 
         private void frmPartialPayment_Load(object sender, EventArgs e)
         {
-            tPaymentOrNo.Text = OrderOfPayment.getLastOPNo();
+           // tPaymentOrNo.Text = OrderOfPayment.getLastOPNo();
             lbStudentName.Text = studentData[2] + ", " + studentData[3] + " " + studentData[4];
             lbStudNo.Text = "[" + studentData[1] + "]";
             new clsDB().Con().FillCombobox(cmbSem, "SELECT SemYr From SemesterYr");
@@ -60,6 +67,7 @@ namespace Cashier
            string semNo = tbSemNo.Text;
            isFullPayment = rbtnFull.Checked;
 
+          
            if (int.Parse(semNo) == 0)
                MessageBox.Show("No Record Found", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -100,21 +108,36 @@ namespace Cashier
                 if ( !Helper.strIsEmpty(tAmount.Text, true))
                 {
                     Student st = new Student(listView1.Items[0].SubItems[1].Text);
-
+                    int OPType = 0;
                     string course = st.course();
 
                     // temporary conditioning to check if a student is masteral or undergrad
-                    int OPType = (course.StartsWith("B")) ? 2 : 3;
+                    try
+                    {
+                        OPType  = (course.StartsWith("B")) ? 2 : 3;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("Invalid Student - Error Definition Cannot Find Course Revalidate Enrollment of Student");
+                    }
+                   
 
                     Dictionary<string,float> amountPerParticular = SAccount.getAmountPerParticular(listView1,3,"tuition/msc");
 
-                    if (amountPerParticular["Tuition Fee"] > 0 && amountPerParticular["Tuition Fee"] > float.Parse(tAmount.Text))
+                    try
                     {
-                        amountPerParticular["Tuition Fee"] = float.Parse(tAmount.Text) - float.Parse(lbMscFee.Text);
-
+                        
+                        if (amountPerParticular["Tuition Fee"] > 0)
+                        {
+                            amountPerParticular["Tuition Fee"] = float.Parse(tAmount.Text) - float.Parse(lbMscFee.Text);
+                        }
+                      
                     }
-                  
-                   
+                    catch (Exception ex)
+                    {
+                        amountPerParticular.Add("Tuition Fee", 0);
+                    }
+                           
 
                     // validation
                     bool isValid = false;
@@ -149,10 +172,10 @@ namespace Cashier
                             OrderOfPayment OP = null;
                             if (Payor.validateCheckDetails(mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), mtbCheckAmount.Text) && mtrbCheck.Checked)
                             {
-                                OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), "Tuition Fee/Misc", studentData[3] +' '+ studentData[4] +' '+studentData[2], int.Parse(studentData[0]), "", mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), float.Parse(mtbCheckAmount.Text));
+                                OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), "Tuition Fee/Misc", studentData[3] +' '+ studentData[4] +' '+studentData[2], int.Parse(studentData[0]), "", mtbBankName.Text, mtbCheckNo.Text, mtdCheckDate.Value.ToShortDateString(), float.Parse(mtbCheckAmount.Text),OPType);
                             }
                             else if (mtrbCash.Checked)
-                                OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), "Tuition Fee/Misc", studentData[3] + ' ' + studentData[4] + ' ' + studentData[2], int.Parse(studentData[0]));
+                                OP = new OrderOfPayment(float.Parse(tAmount.Text), int.Parse(tPaymentOrNo.Text), dtOrDate.Value.ToShortDateString(), "Tuition Fee/Misc", studentData[3] + ' ' + studentData[4] + ' ' + studentData[2], int.Parse(studentData[0]),null,null,null,null,0,OPType);
                             else
                                 MessageBox.Show("There are some fields missing!");
                             // validated 
@@ -167,6 +190,8 @@ namespace Cashier
                                     ePrinting print = new ePrinting(OPData);
                                     print.ePrint("OP");
 
+                                    this.hasUpdated = true;
+                                    this.lastOPNumber = int.Parse(tPaymentOrNo.Text);
 
                                     Close();
 
@@ -204,6 +229,11 @@ namespace Cashier
         }
 
         private void rbtnFull_CheckedChanged_2(object sender, EventArgs e)
+        {
+            textBox1_TextChanged(sender, e);
+        }
+
+        private void mtbDiscount_Click(object sender, EventArgs e)
         {
             textBox1_TextChanged(sender, e);
         }
@@ -257,6 +287,17 @@ namespace Cashier
                 tAmount.Text = mtbCheckAmount.Text;
             }
         }
+
+        private void mtbDiscount_Click_1(object sender, EventArgs e)
+        {
+            frmDiscount f = new frmDiscount(studentData,int.Parse(tbSemNo.Text));
+            
+            f.ShowDialog();
+            if (f.hasUpdated)
+                textBox1_TextChanged(null, null);
+        }
+
+   
 
 
       

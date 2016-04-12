@@ -46,15 +46,20 @@
             this.lbMsc = new System.Windows.Forms.Label();
             this.lbTuition = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
+            this.mtbDeleteOR = new MetroFramework.Controls.MetroButton();
+            this.tbORNoDelete = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.gbORDELETE = new System.Windows.Forms.GroupBox();
             this.gbDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.gbORDELETE.SuspendLayout();
             this.SuspendLayout();
             // 
             // mtbSearch
             // 
-            this.mtbSearch.Location = new System.Drawing.Point(271, 72);
+            this.mtbSearch.Location = new System.Drawing.Point(288, 72);
             this.mtbSearch.Name = "mtbSearch";
-            this.mtbSearch.Size = new System.Drawing.Size(75, 23);
+            this.mtbSearch.Size = new System.Drawing.Size(96, 23);
             this.mtbSearch.TabIndex = 2;
             this.mtbSearch.Text = "Search";
             this.mtbSearch.UseSelectable = true;
@@ -102,7 +107,7 @@
             this.gbDetails.Controls.Add(this.listView1);
             this.gbDetails.Controls.Add(this.metroLabel1);
             this.gbDetails.Controls.Add(this.tORNo);
-            this.gbDetails.Location = new System.Drawing.Point(23, 130);
+            this.gbDetails.Location = new System.Drawing.Point(35, 203);
             this.gbDetails.Name = "gbDetails";
             this.gbDetails.Size = new System.Drawing.Size(355, 287);
             this.gbDetails.TabIndex = 2;
@@ -232,7 +237,7 @@
             this.groupBox2.Controls.Add(this.lbTotal);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.groupBox2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.groupBox2.Location = new System.Drawing.Point(23, 336);
+            this.groupBox2.Location = new System.Drawing.Point(35, 409);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(355, 81);
             this.groupBox2.TabIndex = 9;
@@ -269,11 +274,55 @@
             this.lbTotal.Size = new System.Drawing.Size(67, 23);
             this.lbTotal.TabIndex = 0;
             // 
+            // mtbDeleteOR
+            // 
+            this.mtbDeleteOR.ForeColor = System.Drawing.Color.Maroon;
+            this.mtbDeleteOR.Location = new System.Drawing.Point(288, 132);
+            this.mtbDeleteOR.Name = "mtbDeleteOR";
+            this.mtbDeleteOR.Size = new System.Drawing.Size(96, 23);
+            this.mtbDeleteOR.TabIndex = 10;
+            this.mtbDeleteOR.Tag = "ViewDelete";
+            this.mtbDeleteOR.Text = "Delete OR";
+            this.mtbDeleteOR.UseCustomForeColor = true;
+            this.mtbDeleteOR.UseSelectable = true;
+            this.mtbDeleteOR.Click += new System.EventHandler(this.mtbDeleteOR_Click);
+            // 
+            // tbORNoDelete
+            // 
+            this.tbORNoDelete.Location = new System.Drawing.Point(39, 34);
+            this.tbORNoDelete.Name = "tbORNoDelete";
+            this.tbORNoDelete.Size = new System.Drawing.Size(164, 20);
+            this.tbORNoDelete.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(95, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Confirm OR Delete";
+            // 
+            // gbORDELETE
+            // 
+            this.gbORDELETE.Controls.Add(this.label1);
+            this.gbORDELETE.Controls.Add(this.tbORNoDelete);
+            this.gbORDELETE.Location = new System.Drawing.Point(35, 101);
+            this.gbORDELETE.Name = "gbORDELETE";
+            this.gbORDELETE.Size = new System.Drawing.Size(221, 69);
+            this.gbORDELETE.TabIndex = 13;
+            this.gbORDELETE.TabStop = false;
+            this.gbORDELETE.Text = "-";
+            this.gbORDELETE.Visible = false;
+            // 
             // frmPaymentGetOP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 127);
+            this.ClientSize = new System.Drawing.Size(401, 178);
+            this.Controls.Add(this.gbORDELETE);
+            this.Controls.Add(this.mtbDeleteOR);
             this.Controls.Add(this.tOPNo);
             this.Controls.Add(this.mtbSearch);
             this.Controls.Add(this.groupBox2);
@@ -285,6 +334,8 @@
             this.gbDetails.ResumeLayout(false);
             this.gbDetails.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.gbORDELETE.ResumeLayout(false);
+            this.gbORDELETE.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -309,5 +360,9 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroButton mtbSubmit;
+        private MetroFramework.Controls.MetroButton mtbDeleteOR;
+        private System.Windows.Forms.TextBox tbORNoDelete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox gbORDELETE;
     }
 }

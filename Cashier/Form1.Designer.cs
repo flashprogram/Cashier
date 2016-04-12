@@ -52,6 +52,8 @@
             this.btnLogout = new MetroFramework.Controls.MetroLink();
             this.btnUser = new MetroFramework.Controls.MetroLink();
             this.lbDept = new System.Windows.Forms.Label();
+            this.tspStudentLedger = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -166,7 +168,9 @@
             this.tspAdd,
             this.tspUpdate,
             this.tspView,
-            this.tspDelete});
+            this.tspDelete,
+            this.toolStripSeparator2,
+            this.tspStudentLedger});
             this.toolStrip1.Location = new System.Drawing.Point(0, 95);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(150, 0, 1, 0);
@@ -269,7 +273,7 @@
             this.btnUser.Image = ((System.Drawing.Image)(resources.GetObject("btnUser.Image")));
             this.btnUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUser.ImageSize = 32;
-            this.btnUser.Location = new System.Drawing.Point(584, 29);
+            this.btnUser.Location = new System.Drawing.Point(556, 29);
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(129, 38);
             this.btnUser.TabIndex = 4;
@@ -283,10 +287,26 @@
             this.lbDept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbDept.Font = new System.Drawing.Font("Segoe UI Semilight", 8F);
             this.lbDept.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lbDept.Location = new System.Drawing.Point(647, 55);
+            this.lbDept.Location = new System.Drawing.Point(606, 56);
             this.lbDept.Name = "lbDept";
             this.lbDept.Size = new System.Drawing.Size(98, 17);
             this.lbDept.TabIndex = 6;
+            // 
+            // tspStudentLedger
+            // 
+            this.tspStudentLedger.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tspStudentLedger.Image = ((System.Drawing.Image)(resources.GetObject("tspStudentLedger.Image")));
+            this.tspStudentLedger.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tspStudentLedger.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tspStudentLedger.Name = "tspStudentLedger";
+            this.tspStudentLedger.Size = new System.Drawing.Size(52, 65);
+            this.tspStudentLedger.Text = "Student Ledger";
+            this.tspStudentLedger.Click += new System.EventHandler(this.tspStudentLedger_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 68);
             // 
             // frmHome
             // 
@@ -348,6 +368,8 @@
         private System.Windows.Forms.ToolStripMenuItem developerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportProblemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem requestAdditionalFeaturesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tspStudentLedger;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

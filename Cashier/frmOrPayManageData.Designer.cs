@@ -53,6 +53,11 @@
             this.mtPaymentHistory = new MetroFramework.Controls.MetroTile();
             this.mtcViewPaid = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbPaidOPCount = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.lbOPCount = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.mtHistory = new MetroFramework.Controls.MetroTile();
             this.mtOPList = new MetroFramework.Controls.MetroTile();
@@ -72,16 +77,14 @@
             this.metroLink4 = new MetroFramework.Controls.MetroLink();
             this.metroLink3 = new MetroFramework.Controls.MetroLink();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.metroLink2 = new MetroFramework.Controls.MetroLink();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.studInfo = new System.Windows.Forms.TabPage();
             this.opList = new System.Windows.Forms.TabPage();
             this.payHistory = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.studList = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.mtReissue = new MetroFramework.Controls.MetroTile();
             this.mtcbBalance = new MetroFramework.Controls.MetroCheckBox();
             this.groupBox1.SuspendLayout();
@@ -267,7 +270,7 @@
             this.lvOP.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lvOP.Location = new System.Drawing.Point(538, 97);
             this.lvOP.Name = "lvOP";
-            this.lvOP.Size = new System.Drawing.Size(492, 253);
+            this.lvOP.Size = new System.Drawing.Size(482, 253);
             this.lvOP.TabIndex = 7;
             this.lvOP.UseCompatibleStateImageBehavior = false;
             this.lvOP.View = System.Windows.Forms.View.Details;
@@ -287,7 +290,7 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Payor";
-            this.columnHeader5.Width = 212;
+            this.columnHeader5.Width = 198;
             // 
             // columnHeader4
             // 
@@ -343,7 +346,7 @@
             this.mtcViewPaid.AutoSize = true;
             this.mtcViewPaid.BackColor = System.Drawing.Color.DarkSlateGray;
             this.mtcViewPaid.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.mtcViewPaid.Location = new System.Drawing.Point(888, 71);
+            this.mtcViewPaid.Location = new System.Drawing.Point(927, 69);
             this.mtcViewPaid.Name = "mtcViewPaid";
             this.mtcViewPaid.Size = new System.Drawing.Size(93, 15);
             this.mtcViewPaid.TabIndex = 11;
@@ -356,6 +359,11 @@
             // metroPanel1
             // 
             this.metroPanel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.metroPanel1.Controls.Add(this.label4);
+            this.metroPanel1.Controls.Add(this.label3);
+            this.metroPanel1.Controls.Add(this.lbPaidOPCount);
+            this.metroPanel1.Controls.Add(this.btnRefresh);
+            this.metroPanel1.Controls.Add(this.lbOPCount);
             this.metroPanel1.Controls.Add(this.lollipopLabel1);
             this.metroPanel1.Controls.Add(this.panel1);
             this.metroPanel1.Controls.Add(this.mtbOP);
@@ -380,6 +388,69 @@
             this.metroPanel1.VerticalScrollbarBarColor = true;
             this.metroPanel1.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel1.VerticalScrollbarSize = 10;
+            this.metroPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.metroPanel1_Paint);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(550, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(32, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Paid";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(535, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Unpaid";
+            // 
+            // lbPaidOPCount
+            // 
+            this.lbPaidOPCount.AutoSize = true;
+            this.lbPaidOPCount.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.lbPaidOPCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPaidOPCount.ForeColor = System.Drawing.Color.SpringGreen;
+            this.lbPaidOPCount.Location = new System.Drawing.Point(588, 57);
+            this.lbPaidOPCount.Name = "lbPaidOPCount";
+            this.lbPaidOPCount.Size = new System.Drawing.Size(30, 13);
+            this.lbPaidOPCount.TabIndex = 18;
+            this.lbPaidOPCount.Text = "( 0 )";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.btnRefresh.FlatAppearance.BorderSize = 0;
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRefresh.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.btnRefresh.Location = new System.Drawing.Point(962, 40);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(58, 23);
+            this.btnRefresh.TabIndex = 17;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // lbOPCount
+            // 
+            this.lbOPCount.AutoSize = true;
+            this.lbOPCount.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.lbOPCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOPCount.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbOPCount.Location = new System.Drawing.Point(588, 43);
+            this.lbOPCount.Name = "lbOPCount";
+            this.lbOPCount.Size = new System.Drawing.Size(30, 13);
+            this.lbOPCount.TabIndex = 16;
+            this.lbOPCount.Text = "( 0 )";
             // 
             // panel1
             // 
@@ -487,7 +558,7 @@
             // mtbOP
             // 
             this.mtbOP.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mtbOP.Location = new System.Drawing.Point(168, 405);
+            this.mtbOP.Location = new System.Drawing.Point(158, 405);
             this.mtbOP.Name = "mtbOP";
             this.mtbOP.Size = new System.Drawing.Size(288, 29);
             this.mtbOP.TabIndex = 14;
@@ -524,7 +595,7 @@
             this.mtlName.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.mtlName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
             this.mtlName.ForeColor = System.Drawing.Color.DarkRed;
-            this.mtlName.Location = new System.Drawing.Point(14, 9);
+            this.mtlName.Location = new System.Drawing.Point(12, 9);
             this.mtlName.Name = "mtlName";
             this.mtlName.Size = new System.Drawing.Size(79, 25);
             this.mtlName.TabIndex = 2;
@@ -578,11 +649,11 @@
             this.metroTabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.metroTabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.metroTabControl1.Controls.Add(this.studSearch);
+            this.metroTabControl1.Controls.Add(this.studInfo);
             this.metroTabControl1.Controls.Add(this.opList);
             this.metroTabControl1.Controls.Add(this.payHistory);
-            this.metroTabControl1.Controls.Add(this.tabPage2);
             this.metroTabControl1.Controls.Add(this.studList);
-            this.metroTabControl1.Controls.Add(this.studInfo);
+            this.metroTabControl1.Controls.Add(this.tabPage2);
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.ItemSize = new System.Drawing.Size(11, 200);
             this.metroTabControl1.Location = new System.Drawing.Point(2, 26);
@@ -606,8 +677,6 @@
             this.studSearch.Controls.Add(this.metroLink4);
             this.studSearch.Controls.Add(this.metroLink3);
             this.studSearch.Controls.Add(this.metroLabel4);
-            this.studSearch.Controls.Add(this.metroLink2);
-            this.studSearch.Controls.Add(this.metroLabel3);
             this.studSearch.Controls.Add(this.metroLink1);
             this.studSearch.Controls.Add(this.metroLabel2);
             this.studSearch.Controls.Add(this.pictureBox1);
@@ -637,7 +706,7 @@
             this.mtbStudent.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbStudent.CustomButton.UseSelectable = true;
             this.mtbStudent.Lines = new string[0];
-            this.mtbStudent.Location = new System.Drawing.Point(0, 166);
+            this.mtbStudent.Location = new System.Drawing.Point(0, 181);
             this.mtbStudent.MaxLength = 32767;
             this.mtbStudent.Name = "mtbStudent";
             this.mtbStudent.PasswordChar = '\0';
@@ -665,7 +734,7 @@
             this.metroLink5.ForeColor = System.Drawing.Color.SteelBlue;
             this.metroLink5.Image = ((System.Drawing.Image)(resources.GetObject("metroLink5.Image")));
             this.metroLink5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLink5.Location = new System.Drawing.Point(258, 229);
+            this.metroLink5.Location = new System.Drawing.Point(258, 276);
             this.metroLink5.Name = "metroLink5";
             this.metroLink5.Size = new System.Drawing.Size(139, 23);
             this.metroLink5.TabIndex = 22;
@@ -682,7 +751,7 @@
             this.metroLink4.ForeColor = System.Drawing.Color.SteelBlue;
             this.metroLink4.Image = ((System.Drawing.Image)(resources.GetObject("metroLink4.Image")));
             this.metroLink4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLink4.Location = new System.Drawing.Point(20, 258);
+            this.metroLink4.Location = new System.Drawing.Point(20, 307);
             this.metroLink4.Name = "metroLink4";
             this.metroLink4.Size = new System.Drawing.Size(183, 23);
             this.metroLink4.TabIndex = 21;
@@ -699,7 +768,7 @@
             this.metroLink3.ForeColor = System.Drawing.Color.SteelBlue;
             this.metroLink3.Image = ((System.Drawing.Image)(resources.GetObject("metroLink3.Image")));
             this.metroLink3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.metroLink3.Location = new System.Drawing.Point(20, 227);
+            this.metroLink3.Location = new System.Drawing.Point(20, 276);
             this.metroLink3.Name = "metroLink3";
             this.metroLink3.Size = new System.Drawing.Size(113, 23);
             this.metroLink3.TabIndex = 20;
@@ -711,45 +780,20 @@
             // 
             // metroLabel4
             // 
-            this.metroLabel4.Location = new System.Drawing.Point(0, 190);
+            this.metroLabel4.Location = new System.Drawing.Point(0, 245);
             this.metroLabel4.Name = "metroLabel4";
-            this.metroLabel4.Size = new System.Drawing.Size(441, 30);
+            this.metroLabel4.Size = new System.Drawing.Size(441, 28);
             this.metroLabel4.TabIndex = 19;
             this.metroLabel4.Text = "Selected student info : ";
-            this.metroLabel4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.metroLabel4.WrapToLine = true;
-            // 
-            // metroLink2
-            // 
-            this.metroLink2.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
-            this.metroLink2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLink2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.metroLink2.Location = new System.Drawing.Point(336, 336);
-            this.metroLink2.Name = "metroLink2";
-            this.metroLink2.Size = new System.Drawing.Size(75, 23);
-            this.metroLink2.TabIndex = 18;
-            this.metroLink2.Text = "View Now";
-            this.metroLink2.UseCustomBackColor = true;
-            this.metroLink2.UseCustomForeColor = true;
-            this.metroLink2.UseSelectable = true;
-            this.metroLink2.Click += new System.EventHandler(this.metroLink2_Click);
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.Location = new System.Drawing.Point(0, 297);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(444, 30);
-            this.metroLabel3.TabIndex = 17;
-            this.metroLabel3.Text = "View all Student with Filter";
-            this.metroLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroLabel3.WrapToLine = true;
             // 
             // metroLink1
             // 
             this.metroLink1.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
             this.metroLink1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroLink1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.metroLink1.Location = new System.Drawing.Point(348, 165);
+            this.metroLink1.Location = new System.Drawing.Point(348, 180);
             this.metroLink1.Name = "metroLink1";
             this.metroLink1.Size = new System.Drawing.Size(74, 23);
             this.metroLink1.TabIndex = 2;
@@ -761,8 +805,7 @@
             // 
             // metroLabel2
             // 
-            this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(-1, 143);
+            this.metroLabel2.Location = new System.Drawing.Point(-1, 150);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(445, 22);
             this.metroLabel2.TabIndex = 15;
@@ -802,13 +845,6 @@
             this.payHistory.TabIndex = 2;
             this.payHistory.Text = "Student P-History";
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(85, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(426, 414);
-            this.tabPage2.TabIndex = 6;
-            // 
             // studList
             // 
             this.studList.Location = new System.Drawing.Point(85, 4);
@@ -817,6 +853,13 @@
             this.studList.TabIndex = 1;
             this.studList.Text = "Student List";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(85, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(426, 414);
+            this.tabPage2.TabIndex = 6;
+            // 
             // mtReissue
             // 
             this.mtReissue.ActiveControl = null;
@@ -824,7 +867,7 @@
             this.mtReissue.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.mtReissue.Location = new System.Drawing.Point(879, 353);
             this.mtReissue.Name = "mtReissue";
-            this.mtReissue.Size = new System.Drawing.Size(151, 97);
+            this.mtReissue.Size = new System.Drawing.Size(141, 97);
             this.mtReissue.Style = MetroFramework.MetroColorStyle.Silver;
             this.mtReissue.TabIndex = 9;
             this.mtReissue.Text = "Re-issue OP";
@@ -928,8 +971,6 @@
         private MetroFramework.Controls.MetroLink metroLink4;
         private MetroFramework.Controls.MetroLink metroLink3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroLink metroLink2;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -939,5 +980,10 @@
         private MetroFramework.Controls.MetroTile mtInfo;
         private MetroFramework.Controls.MetroTile mtHistory;
         private MetroFramework.Controls.MetroTile mtOPList;
+        private System.Windows.Forms.Label lbOPCount;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lbPaidOPCount;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
