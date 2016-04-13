@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMetroMainMenu));
-            System.Windows.Forms.ListViewGroup listViewGroup7 = new System.Windows.Forms.ListViewGroup("Test", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Test", System.Windows.Forms.HorizontalAlignment.Left);
             this.mtCashier = new MetroFramework.Controls.MetroTile();
             this.mtOP = new MetroFramework.Controls.MetroTile();
             this.mtReports = new MetroFramework.Controls.MetroTile();
@@ -316,10 +316,10 @@
             this.lvSummaryOfCollection.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvSummaryOfCollection.FullRowSelect = true;
             this.lvSummaryOfCollection.GridLines = true;
-            listViewGroup7.Header = "Test";
-            listViewGroup7.Name = "listViewGroup1";
+            listViewGroup1.Header = "Test";
+            listViewGroup1.Name = "listViewGroup1";
             this.lvSummaryOfCollection.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup7});
+            listViewGroup1});
             this.lvSummaryOfCollection.Location = new System.Drawing.Point(580, 105);
             this.lvSummaryOfCollection.Name = "lvSummaryOfCollection";
             this.lvSummaryOfCollection.Size = new System.Drawing.Size(236, 269);

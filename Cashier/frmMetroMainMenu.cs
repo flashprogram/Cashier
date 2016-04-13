@@ -58,7 +58,7 @@ namespace Cashier
                  
                     break;
                 }
-                case ("Accounting"):
+                case ("Order Of Payment"):
                 {
                     mtOP.Enabled = true;
                     mtCashier.Enabled = false;

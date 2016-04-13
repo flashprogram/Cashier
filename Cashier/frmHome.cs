@@ -235,7 +235,8 @@ namespace Cashier
 
         private void tspStudentLedger_Click(object sender, EventArgs e)
         {
-
+            frmStudentLedger f = new frmStudentLedger();
+            f.ShowDialog();
         }       
     }
 }

@@ -55,6 +55,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -267,6 +268,12 @@
     <Compile Include="frmSearchStudent.Designer.cs">
       <DependentUpon>frmSearchStudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmStudentLedger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStudentLedger.Designer.cs">
+      <DependentUpon>frmStudentLedger.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumberToText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -290,6 +297,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings1.settings</DependentUpon>
     </Compile>
     <Compile Include="UIManagers\DrawHelper.cs" />
     <Compile Include="UIManagers\FontManager.cs" />
@@ -363,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearchStudent.resx">
       <DependentUpon>frmSearchStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStudentLedger.resx">
+      <DependentUpon>frmStudentLedger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -458,6 +473,10 @@
     </None>
     <None Include="SCIISDataSet2.xss">
       <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="Settings1.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />

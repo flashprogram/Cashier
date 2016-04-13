@@ -522,6 +522,11 @@ namespace Cashier
             lbPaidOPCount.Text = "" + OrderOfPayment.getNumberOfPaidOP();
         }
 
+        private void mtbStudent_Click(object sender, EventArgs e)
+        {
+
+        }
+
  
     
    

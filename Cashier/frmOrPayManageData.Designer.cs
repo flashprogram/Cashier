@@ -725,6 +725,7 @@
             this.mtbStudent.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbStudent.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             this.mtbStudent.TextChanged += new System.EventHandler(this.mtbStudent_TextChanged);
+            this.mtbStudent.Click += new System.EventHandler(this.mtbStudent_Click);
             this.mtbStudent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbStudent_KeyDown);
             // 
             // metroLink5
