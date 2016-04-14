@@ -66,6 +66,9 @@
             this.mtSearch = new MetroFramework.Controls.MetroTile();
             this.mtbOP = new MetroFramework.Controls.MetroButton();
             this.mtpStudInfo = new MetroFramework.Controls.MetroPanel();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.mtlLastAttended = new MetroFramework.Controls.MetroLabel();
             this.mtlName = new MetroFramework.Controls.MetroLabel();
             this.mtlStudID = new MetroFramework.Controls.MetroLabel();
             this.mtlBalance = new MetroFramework.Controls.MetroLabel();
@@ -116,6 +119,7 @@
             this.lvManageRecord.MultiSelect = false;
             this.lvManageRecord.Size = new System.Drawing.Size(427, 350);
             this.lvManageRecord.SmallImageList = this.imageList1;
+            this.lvManageRecord.TabIndex = 2;
             this.lvManageRecord.Visible = false;
             this.lvManageRecord.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvManageRecord_ItemChecked);
             // 
@@ -208,7 +212,7 @@
             this.lollipopLabel1.Name = "lollipopLabel1";
             this.lollipopLabel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.lollipopLabel1.Size = new System.Drawing.Size(1200, 31);
-            this.lollipopLabel1.TabIndex = 4;
+            this.lollipopLabel1.TabIndex = 1;
             this.lollipopLabel1.Text = "Student Payment System";
             // 
             // imageList1
@@ -382,7 +386,7 @@
             this.metroPanel1.Location = new System.Drawing.Point(0, 4);
             this.metroPanel1.Name = "metroPanel1";
             this.metroPanel1.Size = new System.Drawing.Size(1055, 644);
-            this.metroPanel1.TabIndex = 12;
+            this.metroPanel1.TabIndex = 0;
             this.metroPanel1.UseCustomBackColor = true;
             this.metroPanel1.UseCustomForeColor = true;
             this.metroPanel1.VerticalScrollbarBarColor = true;
@@ -558,9 +562,12 @@
             // mtbOP
             // 
             this.mtbOP.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mtbOP.Location = new System.Drawing.Point(158, 405);
+            this.mtbOP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.mtbOP.FontSize = MetroFramework.MetroButtonSize.Medium;
+            this.mtbOP.FontWeight = MetroFramework.MetroButtonWeight.Light;
+            this.mtbOP.Location = new System.Drawing.Point(158, 386);
             this.mtbOP.Name = "mtbOP";
-            this.mtbOP.Size = new System.Drawing.Size(288, 29);
+            this.mtbOP.Size = new System.Drawing.Size(273, 29);
             this.mtbOP.TabIndex = 14;
             this.mtbOP.Text = "Process Order of Payment";
             this.mtbOP.UseCustomBackColor = true;
@@ -572,6 +579,9 @@
             // mtpStudInfo
             // 
             this.mtpStudInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.mtpStudInfo.Controls.Add(this.metroLabel3);
+            this.mtpStudInfo.Controls.Add(this.metroLabel1);
+            this.mtpStudInfo.Controls.Add(this.mtlLastAttended);
             this.mtpStudInfo.Controls.Add(this.mtlName);
             this.mtpStudInfo.Controls.Add(this.mtlStudID);
             this.mtpStudInfo.Controls.Add(this.mtlBalance);
@@ -589,15 +599,57 @@
             this.mtpStudInfo.VerticalScrollbarHighlightOnWheel = false;
             this.mtpStudInfo.VerticalScrollbarSize = 10;
             // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel3.ForeColor = System.Drawing.Color.Silver;
+            this.metroLabel3.Location = new System.Drawing.Point(7, 50);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(86, 15);
+            this.metroLabel3.TabIndex = 8;
+            this.metroLabel3.Text = "Last Attended :";
+            this.metroLabel3.UseCustomBackColor = true;
+            this.metroLabel3.UseCustomForeColor = true;
+            // 
+            // metroLabel1
+            // 
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel1.ForeColor = System.Drawing.Color.Silver;
+            this.metroLabel1.Location = new System.Drawing.Point(7, 34);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(50, 15);
+            this.metroLabel1.TabIndex = 7;
+            this.metroLabel1.Text = "Course :";
+            this.metroLabel1.UseCustomBackColor = true;
+            this.metroLabel1.UseCustomForeColor = true;
+            // 
+            // mtlLastAttended
+            // 
+            this.mtlLastAttended.AutoSize = true;
+            this.mtlLastAttended.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.mtlLastAttended.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.mtlLastAttended.ForeColor = System.Drawing.Color.DarkSalmon;
+            this.mtlLastAttended.Location = new System.Drawing.Point(106, 50);
+            this.mtlLastAttended.Name = "mtlLastAttended";
+            this.mtlLastAttended.Size = new System.Drawing.Size(94, 15);
+            this.mtlLastAttended.TabIndex = 6;
+            this.mtlLastAttended.Text = "[ Last Attended ]";
+            this.mtlLastAttended.UseCustomBackColor = true;
+            this.mtlLastAttended.UseCustomForeColor = true;
+            // 
             // mtlName
             // 
             this.mtlName.AutoSize = true;
             this.mtlName.FontSize = MetroFramework.MetroLabelSize.Tall;
-            this.mtlName.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.mtlName.ForeColor = System.Drawing.Color.DarkRed;
-            this.mtlName.Location = new System.Drawing.Point(12, 9);
+            this.mtlName.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.mtlName.ForeColor = System.Drawing.Color.SteelBlue;
+            this.mtlName.Location = new System.Drawing.Point(0, 9);
             this.mtlName.Name = "mtlName";
-            this.mtlName.Size = new System.Drawing.Size(79, 25);
+            this.mtlName.Size = new System.Drawing.Size(86, 25);
             this.mtlName.TabIndex = 2;
             this.mtlName.Text = "[ Name ]";
             this.mtlName.UseCustomBackColor = true;
@@ -635,10 +687,11 @@
             // 
             this.mtlCourse.AutoSize = true;
             this.mtlCourse.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.mtlCourse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mtlCourse.Location = new System.Drawing.Point(15, 40);
+            this.mtlCourse.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.mtlCourse.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.mtlCourse.Location = new System.Drawing.Point(106, 34);
             this.mtlCourse.Name = "mtlCourse";
-            this.mtlCourse.Size = new System.Drawing.Size(54, 15);
+            this.mtlCourse.Size = new System.Drawing.Size(58, 15);
             this.mtlCourse.TabIndex = 3;
             this.mtlCourse.Text = "[ Course ]";
             this.mtlCourse.UseCustomBackColor = true;
@@ -664,7 +717,7 @@
             this.metroTabControl1.Size = new System.Drawing.Size(515, 422);
             this.metroTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Silver;
-            this.metroTabControl1.TabIndex = 12;
+            this.metroTabControl1.TabIndex = 1;
             this.metroTabControl1.UseSelectable = true;
             this.metroTabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.metroTabControl1_DrawItem);
             this.metroTabControl1.SelectedIndexChanged += new System.EventHandler(this.metroTabControl1_SelectedIndexChanged);
@@ -692,25 +745,25 @@
             // 
             // mtbStudent
             // 
-            this.mtbStudent.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.mtbStudent.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             // 
             // 
             // 
             this.mtbStudent.CustomButton.Image = null;
-            this.mtbStudent.CustomButton.Location = new System.Drawing.Point(320, 1);
+            this.mtbStudent.CustomButton.Location = new System.Drawing.Point(303, 1);
             this.mtbStudent.CustomButton.Name = "";
-            this.mtbStudent.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.mtbStudent.CustomButton.Size = new System.Drawing.Size(33, 33);
             this.mtbStudent.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.mtbStudent.CustomButton.TabIndex = 1;
             this.mtbStudent.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbStudent.CustomButton.UseSelectable = true;
+            this.mtbStudent.FontSize = MetroFramework.MetroTextBoxSize.Tall;
+            this.mtbStudent.ForeColor = System.Drawing.Color.DarkGray;
             this.mtbStudent.Lines = new string[0];
-            this.mtbStudent.Location = new System.Drawing.Point(0, 181);
+            this.mtbStudent.Location = new System.Drawing.Point(13, 192);
             this.mtbStudent.MaxLength = 32767;
             this.mtbStudent.Name = "mtbStudent";
             this.mtbStudent.PasswordChar = '\0';
-            this.mtbStudent.PromptText = "Lastname, Firstname Middle (StudNo N/A)";
+            this.mtbStudent.PromptText = "Lastname, Firstname Middle";
             this.mtbStudent.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.mtbStudent.SelectedText = "";
             this.mtbStudent.SelectionLength = 0;
@@ -718,21 +771,25 @@
             this.mtbStudent.ShortcutsEnabled = true;
             this.mtbStudent.ShowButton = true;
             this.mtbStudent.ShowClearButton = true;
-            this.mtbStudent.Size = new System.Drawing.Size(342, 23);
-            this.mtbStudent.TabIndex = 1;
+            this.mtbStudent.Size = new System.Drawing.Size(337, 35);
+            this.mtbStudent.TabIndex = 6;
+            this.mtbStudent.UseCustomForeColor = true;
             this.mtbStudent.UseSelectable = true;
-            this.mtbStudent.WaterMark = "Lastname, Firstname Middle (StudNo N/A)";
-            this.mtbStudent.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.mtbStudent.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.mtbStudent.WaterMark = "Lastname, Firstname Middle";
+            this.mtbStudent.WaterMarkColor = System.Drawing.Color.DarkGray;
+            this.mtbStudent.WaterMarkFont = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtbStudent.TextChanged += new System.EventHandler(this.mtbStudent_TextChanged);
             this.mtbStudent.Click += new System.EventHandler(this.mtbStudent_Click);
+            this.mtbStudent.Enter += new System.EventHandler(this.mtbStudent_Enter);
             this.mtbStudent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbStudent_KeyDown);
+            this.mtbStudent.Leave += new System.EventHandler(this.mtbStudent_Leave);
             // 
             // metroLink5
             // 
             this.metroLink5.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
             this.metroLink5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLink5.ForeColor = System.Drawing.Color.SteelBlue;
+            this.metroLink5.DisplayFocus = true;
+            this.metroLink5.ForeColor = System.Drawing.Color.CadetBlue;
             this.metroLink5.Image = ((System.Drawing.Image)(resources.GetObject("metroLink5.Image")));
             this.metroLink5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.metroLink5.Location = new System.Drawing.Point(258, 276);
@@ -749,7 +806,7 @@
             // 
             this.metroLink4.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
             this.metroLink4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLink4.ForeColor = System.Drawing.Color.SteelBlue;
+            this.metroLink4.ForeColor = System.Drawing.Color.CadetBlue;
             this.metroLink4.Image = ((System.Drawing.Image)(resources.GetObject("metroLink4.Image")));
             this.metroLink4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.metroLink4.Location = new System.Drawing.Point(20, 307);
@@ -766,7 +823,7 @@
             // 
             this.metroLink3.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
             this.metroLink3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroLink3.ForeColor = System.Drawing.Color.SteelBlue;
+            this.metroLink3.ForeColor = System.Drawing.Color.CadetBlue;
             this.metroLink3.Image = ((System.Drawing.Image)(resources.GetObject("metroLink3.Image")));
             this.metroLink3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.metroLink3.Location = new System.Drawing.Point(20, 276);
@@ -781,22 +838,25 @@
             // 
             // metroLabel4
             // 
+            this.metroLabel4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.metroLabel4.Location = new System.Drawing.Point(0, 245);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(441, 28);
-            this.metroLabel4.TabIndex = 19;
+            this.metroLabel4.TabIndex = 0;
             this.metroLabel4.Text = "Selected student info : ";
             this.metroLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroLabel4.UseCustomForeColor = true;
             this.metroLabel4.WrapToLine = true;
             // 
             // metroLink1
             // 
             this.metroLink1.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDown;
+            this.metroLink1.BackColor = System.Drawing.Color.Honeydew;
             this.metroLink1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroLink1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.metroLink1.Location = new System.Drawing.Point(348, 180);
+            this.metroLink1.Location = new System.Drawing.Point(348, 192);
             this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(74, 23);
+            this.metroLink1.Size = new System.Drawing.Size(77, 35);
             this.metroLink1.TabIndex = 2;
             this.metroLink1.Text = "Search Now";
             this.metroLink1.UseCustomBackColor = true;
@@ -806,11 +866,13 @@
             // 
             // metroLabel2
             // 
+            this.metroLabel2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.metroLabel2.Location = new System.Drawing.Point(-1, 150);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(445, 22);
             this.metroLabel2.TabIndex = 15;
             this.metroLabel2.Text = "Quickly Search any student using  Student Name";
+            this.metroLabel2.UseCustomForeColor = true;
             this.metroLabel2.WrapToLine = true;
             // 
             // pictureBox1
@@ -986,5 +1048,8 @@
         private System.Windows.Forms.Label lbPaidOPCount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private MetroFramework.Controls.MetroLabel mtlLastAttended;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroLabel metroLabel1;
     }
 }

@@ -19,6 +19,7 @@ namespace Cashier.classes
             {
                 this.StudID = int.Parse(StudID);
                 new clsDB().Con().SelectData("SELECT * FROM student WHERE StudID = " + StudID, studentData);
+                isStudent = true;
             }
         }
 
@@ -32,6 +33,20 @@ namespace Cashier.classes
             course = obj[0];
 
             return course;
+        }
+
+        public string lastAttended()
+        {
+
+            string lastAttended = "";
+            string[] obj = new string[1];
+
+            new clsDB().Con().SelectData("SELECT TOP 1 SemYr FROM SemesterYr as sem JOIN Student_Account as sa on sa.SemNo = sem.SemNo WHERE sa.StudID = " + StudID +" ORDER BY sa.SemNo DESC", obj);
+
+            lastAttended = obj[0];
+
+            return lastAttended;
+
         }
 
         public Student (Dictionary<string, string> data)

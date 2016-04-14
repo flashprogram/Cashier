@@ -19,13 +19,15 @@ namespace Cashier
         //string sql = "SELECT * FROM studentAccount JOIN student ON student.StudID = studentAccount.StudID WHERE Balance > 0";
         AutoCompleteStringCollection DataCollection;
         string sql = "SELECT  TOP 50 SA.SemNo, SA.StudID,S.StudNo, SUM(Amount - ISNULL(Payment, 0 )) as Amount ,FName, MName, LName, ProgCode  FROM Student_Account as SA JOIN Student as S ON SA.StudID = S.StudID JOIN StudentCourse as SC ON SC.StudID = SA.StudID WHERE SA.semNo = " + Semester.getCurrentSemester() + " GROUP BY SA.StudID,S.StudNo, SA.SemNo,FName, MName,LName, ProgCode ";
-        string opQuery = "SELECT TOP 50 OPNo, OP.Amount, CAST( CASE WHEN OP.Payor IS NULL OR OP.Payor = '' THEN CONCAT(FName,' ',MName,' ',LName) ELSE OP.Payor END AS varchar(100))  as Payor, CAST (CASE WHEN  PAID = 0 THEN 'Not Paid' ELSE 'Paid' END as varchar(50) ) as Paid From tbl_PayOrder as OP LEFT JOIN Student as S ON S.StudID = OP.StudID WHERE Paid = 0 ORDER BY OP.OPNo DESC";
+        string opQuery = "SELECT TOP 50 OPNo, OP.Amount, CAST( CASE WHEN OP.Payor IS NULL OR OP.Payor = '' THEN CONCAT(FName,' ',MName,' ',LName) ELSE OP.Payor END AS varchar(100))  as Payor, CAST (CASE WHEN  PAID = 0 THEN 'Not Paid' ELSE 'Paid' END as varchar(50) ) as Paid From tbl_PayOrder as OP LEFT JOIN Student as S ON S.StudID = OP.StudID WHERE Paid = 0 ORDER BY OP.DateIssued DESC";
        
         public int lastOPNumber = int.Parse(OrderOfPayment.getLastOPNo());
-        
+        public int tempStudID = 0;
+
         public frmOrPayManageData()
         {
             InitializeComponent();
+            
 
             //Application.AddMessageFilter(this);
             RefreshData(" ");
@@ -34,6 +36,7 @@ namespace Cashier
 
             lbOPCount.Text = ""+OrderOfPayment.getNumberOfOP();
             lbPaidOPCount.Text = ""+OrderOfPayment.getNumberOfPaidOP();
+            mtbStudent.Focus();
         }
 
        
@@ -51,7 +54,7 @@ namespace Cashier
             }
 
             f = (frmOrPayManageData)thisForm;
-
+            f.mtbStudent.Focus();
             return f;
         }
 
@@ -210,7 +213,7 @@ namespace Cashier
         private void mtcViewPaid_CheckedChanged(object sender, EventArgs e)
         {
             if (mtcViewPaid.Checked)
-                new clsDB().Con().FillLvw(lvOP, "SELECT TOP 50 OPNo, OP.Amount, CAST( CASE WHEN OP.Payor IS NULL OR OP.Payor = '' THEN CONCAT(FName,' ',MName,' ',LName) ELSE OP.Payor END AS varchar(100))  as Payor, CAST (CASE WHEN  PAID = 0 THEN 'Not Paid' ELSE 'Paid' END as varchar(50) ) as Paid From tbl_PayOrder as OP  LEFT JOIN Student as S ON S.StudID = OP.StudID WHERE Paid = 1 ORDER BY OP.OPNo DESC ");
+                new clsDB().Con().FillLvw(lvOP, "SELECT TOP 50 OPNo, OP.Amount, CAST( CASE WHEN OP.Payor IS NULL OR OP.Payor = '' THEN CONCAT(FName,' ',MName,' ',LName) ELSE OP.Payor END AS varchar(100))  as Payor, CAST (CASE WHEN  PAID = 0 THEN 'Not Paid' ELSE 'Paid' END as varchar(50) ) as Paid From tbl_PayOrder as OP  LEFT JOIN Student as S ON S.StudID = OP.StudID WHERE Paid = 1 ORDER BY OP.DateIssued DESC ");
             else
                 new clsDB().Con().FillLvw(lvOP, opQuery);
         }
@@ -344,12 +347,23 @@ namespace Cashier
 
         private void metroLink1_Click(object sender, EventArgs e)
         {
-            /*KeyEventArgs ea = new KeyEventArgs(Keys.Enter);
+            frmSearchStudent f;
+            if (mtbStudent.Text.Length > 0)
+                f = new frmSearchStudent(mtbStudent.Text);
+            else
+                f = new frmSearchStudent();
+            f.ShowDialog();
 
-            mtbStudent_KeyDown(null, ea);*/
+            if(f.StudID > 0 )
+            {
+                this.tempStudID = f.StudID;
+                Student st = new Student(this.tempStudID.ToString());
 
-            frmSearchStudent f = new frmSearchStudent();
-            f.Show();
+                mtbStudent.Text = st.studentData[2] + ", " + st.studentData[3] + " " + st.studentData[4];
+                mtbStudent_KeyDown(null, null);
+            }
+
+
         }
 
         private void metroLink2_Click(object sender, EventArgs e)
@@ -425,7 +439,7 @@ namespace Cashier
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataSet ds = new DataSet();
 
-            string sql = "SELECT DISTINCT TOP 20  CONCAT(LName,',',FName,' ',MName,'(',StudNo,')') FROM Student WHERE StudNo Like '%" + mtbStudent.Text + "%' OR CONCAT(LName,', ', FName) LIKE '%" + mtbStudent.Text + "%'  OR CONCAT(FName,' ',LName) LIKE '%" + mtbStudent.Text +"%'";
+            string sql = "SELECT DISTINCT TOP 30  CONCAT(LName,',',FName,' ',MName,'(',StudNo,')') FROM Student WHERE  ( StudNo Like '%" + mtbStudent.Text + "%' )  OR  ( CONCAT(LName,', ', FName) LIKE '%" + mtbStudent.Text + "%'    OR CONCAT(FName,' ',LName) LIKE '%" + mtbStudent.Text +"%' )";
             connection = new SqlConnection( Connect.ToDB());
             try
             {
@@ -453,48 +467,44 @@ namespace Cashier
         {
             if (!string.IsNullOrEmpty(mtbStudent.Text) && !Helper.strIsEmpty(mtbStudent.Text))
             {
-                getData(DataCollection);
-                mtbStudent.AutoCompleteCustomSource = DataCollection;
+               // getData(DataCollection);
+               // mtbStudent.AutoCompleteCustomSource = DataCollection;
             }
         }
 
  
 
-        private void mtbStudent_KeyDown(object sender, KeyEventArgs e)
+        private void mtbStudent_KeyDown(object sender, KeyEventArgs e) 
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                string nameRest = "", studentNo = "", lastname = "";
-                // position of comma for firstname and lastname
-                
-                try
+                if (e.KeyCode == Keys.F5)
                 {
-                     lastname = mtbStudent.Text.Substring(0, mtbStudent.Text.IndexOf(','));
-                     nameRest = mtbStudent.Text.Substring(lastname.Length + 1, mtbStudent.Text.IndexOf('(') - lastname.Length - 1);
-
-                     studentNo = mtbStudent.Text.Substring(mtbStudent.Text.IndexOf('(') + 1, mtbStudent.Text.IndexOf(')') - 2 - (lastname.Length + nameRest.Length));
-
-                    
+                    metroLink1_Click(null, null);
                 }
-                catch (Exception ex)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    MessageBox.Show("Incomplete Data Input");
+                    metroLink1_Click(null, null);
                 }
-               
-                data["StudNo"] = studentNo;
-                data["LName"] = lastname;
-                data["nameRest"] = nameRest;
+            }
+            catch (Exception ex) { }
 
-                Student st = new Student(data);
+            if (this.tempStudID > 0)
+            {
+              
+                Student st = new Student(""+tempStudID);
 
                 if (st.isStudent)
                 {
                     mtpStudInfo.Visible = true;
                     mtbOP.Visible = true;
-                    mtlName.Text = st.studentData[4] + ", " + st.studentData[2] + " " + st.studentData[3];
+                    mtlName.Text =   st.studentData[2] + ", " + st.studentData[3] + " " + st.studentData[4];
                     mtlCourse.Text = st.course();
                     mtlStudID.Text = st.studentData[0];
+                    mtlLastAttended.Text = st.lastAttended();
+
+                    StudentAccount SA = new StudentAccount(tempStudID);
+                    Dictionary<string, float> dict = SA.getStudentAccountBalances();
                 }
                 else
                     MessageBox.Show("Invalid Student Data");
@@ -527,34 +537,45 @@ namespace Cashier
 
         }
 
- 
-    
-   
-      
+        private void mtbStudent_Enter(object sender, EventArgs e)
+        {
+            metroToolTip1.Style = MetroFramework.MetroColorStyle.Blue;
+            metroToolTip1.Show(" Press : F5/Enter to Search  ", mtbStudent, mtbStudent.Width / 2, mtbStudent.Height, 10000000);
+        }
+
+        private void mtbStudent_Leave(object sender, EventArgs e)
+        {
+            metroToolTip1.Hide(mtbStudent);
+        }
 
 
-  
 
 
-  
-    
 
 
-  
-     
-
-      
-
-    
 
 
-     
-
-    
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // END OF EVENT LISTENER
-     
+
     }
 }

@@ -9,20 +9,48 @@ namespace Cashier.classes
 {
     class StudentAccount
     {
-        public int tuitionMarker;
-        public float total, tuitionFee, mscFee, balance, payment, amount;
+        public int tuitionMarker, StudID = 0;
+        public float total, tuitionFee, mscFee, balance, payment, amount, currentBalance = 0;
         public Dictionary<string, float> amountPerParticular = new Dictionary<string,float>();
         public Dictionary<string, string> data = new Dictionary<string,string>();
         public int[] seqNo = new int[20];
         public bool hasNSTPPick = false;
 
-     
+        // For Student Ledger and other uses
+        public Dictionary<string, float> studentAccountBalances = new Dictionary<string, float>();
 
 
         public StudentAccount(int StudID = 0)
         {
-            
+            if(StudID > 0)
+            {
+                this.StudID = StudID;
+            }
         }
+
+
+        public Dictionary<string, float> getStudentAccountBalances()
+        {
+            string query = "SELECT col.Date_Paid, col.ORNumber, col.Amount, ( SUM(sa.Amount) - col.Amount ) as Balance  FROM Collections col JOIN tbl_PayOrder as op on op.OPNo = col.OPNumber  " +
+                           "JOIN Student_Account sa ON sa.StudID = op.StudID WHERE sa.StudID = " + this.StudID +
+                           " GROUP BY sa.SemNo ORDER BY sa.SemNo DESC";
+
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            new clsDB().Con().SelectDataDictionary(query, dict);
+
+
+
+            return studentAccountBalances;
+        }
+
+        public float getCurrentBalance()
+        {
+
+            return currentBalance; 
+        }
+
+
+
 
         public Dictionary<string, string> getData(string[][] qData)
         {

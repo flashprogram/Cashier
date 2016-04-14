@@ -298,6 +298,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SCIISDataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Settings1.cs" />
     <Compile Include="Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
