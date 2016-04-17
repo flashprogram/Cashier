@@ -504,7 +504,7 @@ namespace Cashier
                     mtlLastAttended.Text = st.lastAttended();
 
                     StudentAccount SA = new StudentAccount(tempStudID);
-                    Dictionary<string, float> dict = SA.getStudentAccountBalances();
+                    
                 }
                 else
                     MessageBox.Show("Invalid Student Data");

@@ -46,6 +46,9 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Properties.Resources.Designer.cs">
+      <HintPath>..\..\..\..\..\Downloads\Compressed\metroframework-modern-ui-master\metroframework-modern-ui-master\DLL Files\Properties.Resources.Designer.cs.dll</HintPath>
+    </Reference>
     <Reference Include="Shortcut, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Shortcut.dll</HintPath>
@@ -306,7 +309,7 @@
     </Compile>
     <Compile Include="UIManagers\DrawHelper.cs" />
     <Compile Include="UIManagers\FontManager.cs" />
-    <EmbeddedResource Include="classes\Report1.rdlc" />
+    <EmbeddedResource Include="Reports\Report1.rdlc" />
     <EmbeddedResource Include="frmCancelOR.resx">
       <DependentUpon>frmCancelOR.cs</DependentUpon>
     </EmbeddedResource>
@@ -480,7 +483,9 @@
       <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

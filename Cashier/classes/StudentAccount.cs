@@ -17,7 +17,7 @@ namespace Cashier.classes
         public bool hasNSTPPick = false;
 
         // For Student Ledger and other uses
-        public Dictionary<string, float> studentAccountBalances = new Dictionary<string, float>();
+        public string[][] studentAccountBalances ;
 
 
         public StudentAccount(int StudID = 0)
@@ -29,16 +29,20 @@ namespace Cashier.classes
         }
 
 
-        public Dictionary<string, float> getStudentAccountBalances()
+        public string[][] getStudentAccountBalances()
         {
-            string query = "SELECT col.Date_Paid, col.ORNumber, col.Amount, ( SUM(sa.Amount) - col.Amount ) as Balance  FROM Collections col JOIN tbl_PayOrder as op on op.OPNo = col.OPNumber  " +
-                           "JOIN Student_Account sa ON sa.StudID = op.StudID WHERE sa.StudID = " + this.StudID +
-                           " GROUP BY sa.SemNo ORDER BY sa.SemNo DESC";
+            string query = "SELECT DISTINCT sa.SemNo, col.ORNumber ,Date_Paid , ( SUM(sa.Amount) - SUM(ISNULL(sa.Payment,0)) ) as Amount, Col.Amount as Payment, (( SUM(sa.Amount) - SUM(ISNULL(sa.Payment,0)) )  - col.Amount) as Balance  " +
+                           "from STUDENT_ACCOUNT sa "+
+                            "FULL   JOIN tbl_PayOrder OP on OP.StudID = sa.StudID AND sa.SemNo = OP.SemNo" +
+                           " FULL JOIN Collections col ON col.OPNumber = OP.OPNo" +
+                           " WHERE sa.StudID = "+ this.StudID + " AND sa.Particular IS NOT NULL AND Purpose = 'Tuition Fee/Misc'" +
+                            "GROUP BY sa.SemNo,col.ORNumber, col.Amount, Date_Paid" +
+                           " ORDER BY Date_Paid DESC";
 
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            new clsDB().Con().SelectDataDictionary(query, dict);
+            string[][] dict = new string[new clsDB().Con().countRecord(query)][];
+            new clsDB().Con().SelectData(query, dict);
 
-
+            studentAccountBalances = dict;
 
             return studentAccountBalances;
         }

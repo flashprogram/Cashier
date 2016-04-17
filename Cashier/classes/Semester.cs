@@ -6,8 +6,27 @@ using Cashier.classes;
 
 namespace Cashier.classes
 {
+
     class Semester
     {
+     
+
+        public Semester(int SemNo = 0)
+        {
+            if (SemNo > 0)
+            {
+                string query = "SELECT SemYr From SemesterYr Where SemNo = " + SemNo;
+                string[] tmp = new string[1];
+
+                new clsDB().Con().SelectData(query, tmp);
+
+                SemYr = tmp[0];
+            }
+
+        }
+
+        public string SemYr { get;set;} 
+
         public static int getCurrentSemester(string semYrName = "")
         {
             string addQuery = "";
