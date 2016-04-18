@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.cashierDailyReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SCIISDataSet = new Cashier.SCIISDataSet();
             this.dtDailyReportDate = new System.Windows.Forms.DateTimePicker();
@@ -82,9 +82,9 @@
             // 
             this.reportViewer1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.reportViewer1.DocumentMapWidth = 44;
-            reportDataSource1.Name = "DataSet2";
-            reportDataSource1.Value = this.cashierDailyReportBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource2.Name = "DataSet2";
+            reportDataSource2.Value = this.cashierDailyReportBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Cashier.Reports.DailyReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(43, 482);
             this.reportViewer1.Name = "reportViewer1";

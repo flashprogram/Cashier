@@ -11,7 +11,6 @@ namespace Cashier.classes
     class ePrinting
     {
 
-
         public Dictionary<string, string> printData = new Dictionary<string, string>();
         public string[][] particularsAmount;
         public bool isOtherPayment, isLandscape = false, forReport = false, hasMorePages = false, forSummary = false;
@@ -27,7 +26,7 @@ namespace Cashier.classes
             particularsAmount = pAmount;
             this.isOtherPayment = isOtherPayment;
         }
-        public void ePrint(string printPage = "OR")
+        public void ePrint(string printPage = "OR", Form parent = null)
         {
             PrintDialog printDioalog = new PrintDialog();
             PrintDocument printDocument = new PrintDocument();
@@ -74,8 +73,20 @@ namespace Cashier.classes
                 // do some Stuff 
                 // Show Print Preview Dialog
                 previewDialog.Document = printDocument;
-               
-                previewDialog.ShowDialog();
+
+                // FROM http://stackoverflow.com/questions/18421107/setting-initial-state-of-printpreviewdialog-controls
+                ToolStripSplitButton zoomButton = ((ToolStrip)previewDialog.Controls[1]).Items[1] as ToolStripSplitButton;
+                zoomButton.DropDownItems[5].PerformClick();//Check the 75% item in the zoom list
+
+                if (parent == null)
+                    previewDialog.ShowDialog();
+                else
+                {
+                    previewDialog.MdiParent = parent;
+                    previewDialog.Show();
+                }
+                   
+
                 printDocument.DefaultPageSettings.PaperSize = new PaperSize("Legal", 850, 1400);
             }
 

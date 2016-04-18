@@ -13,6 +13,7 @@ namespace Cashier
 {
     public partial class frmReportDaily : MetroForm
     {
+        Form parent;
         public frmReportDaily()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace Cashier
             
 
             this.reportViewer1.RefreshReport();
+             parent = this.MdiParent;
            
         }
 
@@ -48,8 +50,8 @@ namespace Cashier
             print.date = dtDailyReportDate.Value.ToShortDateString();
             print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRADUATE") ? 2 : (cmbOPType.Text == "GRADUATE") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
             print.OPTypeText = cmbOPType.Text;
-            
-            print.ePrint("DRLayoutOne");
+
+            print.ePrint("DRLayoutOne", parent);
         }
 
         private void metroTile1_Click(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace Cashier
             print.OPType = (cmbOPType.Text == "BTR") ? 1 : (cmbOPType.Text == "UNDERGRADUATE") ? 2 : (cmbOPType.Text == "GRADUATE") ? 3 : (cmbOPType.Text == "FIDUCIARY") ? 4 : (cmbOPType.Text == "IGP") ? 5 : 0;
             print.OPTypeText = cmbOPType.Text;
 
-            print.ePrint("DRLayoutOne");
+            print.ePrint("DRLayoutOne", parent);
         }
 
 

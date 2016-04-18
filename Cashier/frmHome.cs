@@ -122,7 +122,7 @@ namespace Cashier
             currForm = f;
             f.ControlBox = false;
             f.Show();
-           
+            
             f.WindowState = FormWindowState.Maximized;
         }
 

@@ -31,13 +31,13 @@ namespace Cashier.classes
 
         public string[][] getStudentAccountBalances()
         {
-            string query = "SELECT DISTINCT sa.SemNo, col.ORNumber ,Date_Paid , ( SUM(sa.Amount) - SUM(ISNULL(sa.Payment,0)) ) as Amount, Col.Amount as Payment, (( SUM(sa.Amount) - SUM(ISNULL(sa.Payment,0)) )  - col.Amount) as Balance  " +
+            string query = "SELECT DISTINCT sa.SemNo, col.ORNumber ,Date_Paid , ( SUM(sa.Amount) ) as Amount, Col.Amount as Payment, (( SUM(sa.Amount) - SUM(ISNULL(sa.Payment,0)) )  - col.Amount) as Balance  " +
                            "from STUDENT_ACCOUNT sa "+
-                            "FULL   JOIN tbl_PayOrder OP on OP.StudID = sa.StudID AND sa.SemNo = OP.SemNo" +
-                           " FULL JOIN Collections col ON col.OPNumber = OP.OPNo" +
-                           " WHERE sa.StudID = "+ this.StudID + " AND sa.Particular IS NOT NULL AND Purpose = 'Tuition Fee/Misc'" +
+                            "   JOIN tbl_PayOrder OP on OP.StudID = sa.StudID AND sa.SemNo = OP.SemNo" +
+                           "  JOIN Collections col ON col.OPNumber = OP.OPNo" +
+                           " WHERE sa.StudID = "+ this.StudID + " AND col.Date_Paid IS NOT NULL AND Purpose = 'Tuition Fee/Misc' " +
                             "GROUP BY sa.SemNo,col.ORNumber, col.Amount, Date_Paid" +
-                           " ORDER BY Date_Paid DESC";
+                           " ORDER BY ORNumber ASC";
 
             string[][] dict = new string[new clsDB().Con().countRecord(query)][];
             new clsDB().Con().SelectData(query, dict);
